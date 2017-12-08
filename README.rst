@@ -1,37 +1,14 @@
-python-yamlordereddictloader
-============================
+yamlloader
+==========
 
-.. image:: https://img.shields.io/pypi/l/yamlordereddictloader.svg
-           :target: https://opensource.org/licenses/MIT
-           :alt: License
-
-.. image:: https://img.shields.io/pypi/pyversions/yamlordereddictloader.svg
-           :target: https://pypi.python.org/pypi/yamlordereddictloader
-           :alt: Versions
-
-.. image:: https://img.shields.io/pypi/v/yamlordereddictloader.svg
-           :target: https://pypi.python.org/pypi/yamlordereddictloader
-           :alt: PyPi
-
-.. image:: https://img.shields.io/badge/github-repo-yellow.jpg
-           :target: https://github.com/fmenabe/python-yamlordereddictloader
-           :alt: Code repo
-
-.. image:: https://landscape.io/github/fmenabe/python-yamlordereddictloader/master/landscape.svg?style=flat
-           :target: https://landscape.io/github/fmenabe/python-yamlordereddictloader/master
-           :alt: Code Health
+This project was mirrored from `yamlordereddict <https://github.com/fmenabe/python-yamlordereddictloader>_
+Many thanks to the original author François Ménabé!
 
 
-This module provide a loader and a dumper for PyYAML allowing to keep items order
-when loading a file (by putting them in ``OrderedDict`` objects) and to manage
-``OrderedDict`` objects when dumping to a file.
 
-The loader is based on stackoverflow topic (thanks to Eric Naeseth):
-http://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts#answer-5121963
-
-Self promotion: I use it a lot with `clg <https://clg.readthedocs.io>`_, which
-allows to generate command-line definition from a configuration file, for keeping
-order of subcommands, options and arguments in the help message!
+This module provides loaders and dumpers for PyYAML. Currently, an OrderedDict loader/dumper is
+ implemented, allowing to keep items order
+when loading resp. dumping a file.
 
 
 To install it
@@ -39,7 +16,7 @@ To install it
 
 .. code-block:: bash
 
-    $ pip install yamlordereddictloader
+    $ pip install yamlloader
 
 Loader usage
 ------------
@@ -47,13 +24,13 @@ Loader usage
 .. code-block:: python
 
     import yaml
-    import yamlordereddictloader
+    import yamlloader
 
-    data = yaml.load(open('myfile.yml'), Loader=yamlordereddictloader.Loader)
+    data = yaml.load(open('myfile.yml'), Loader=yamlloader.ordereddict.CLoader)  # CLoader is faster than Loader
 
-**Note:** For using the safe loader (which want standard YAML tags and does
-not construct arbitrary Python objects), replace ``yamlorderdictloader.Loader`` by
-``yamlorderedictloader.SafeLoader``.
+**Note:** For using the safe loader (which takes standard YAML tags and does
+not construct arbitrary Python objects), replace ``yamlorderdictloader.CLoader`` by
+``yamlorderedictloader.CSafeLoader``.
 
 Dumper usage
 ------------
@@ -61,18 +38,17 @@ Dumper usage
 .. code-block:: python
 
     import yaml
-    import yamlordereddictloader
+    import yamlloader
     from collections import OrderedDict
 
     data = OrderedDict([
         ('key1', 'val1'),
         ('key2', OrderedDict([('key21', 'val21'), ('key22', 'val22')]))
     ])
-    yaml.dump(
-        data,
-        open('myfile.yml', 'w'),
-        Dumper=yamlordereddictloader.Dumper,
-        default_flow_style=False)
+    yaml.dump(data,
+              open('myfile.yml', 'w'),
+              Dumper=yamlloader.ordereddict.CDumper,
+              default_flow_style=False)
 
 **Note:** For using the safe dumper (which produce standard YAML tags and does
 not represent arbitrary Python objects), replace ``yamlorderdictloader.Dumper`` by

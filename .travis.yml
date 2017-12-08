@@ -1,0 +1,98 @@
+#sudo: required
+os: linux
+language: python
+python:
+ - '2.6'
+ - '2.7'
+ - '3.4'
+ - '3.5'
+ - '3.6'
+#matrix:
+# include:
+#  - os: osx
+#    language: generic
+
+#cache: pip
+#sudo: required
+
+#matrix:
+#  allow_failures:
+#    - python: '2.7'
+#    - python: '3.5'
+#    - python: '3.6'
+
+
+#addons:
+#  apt:
+#    packages:
+#    - libatlas-dev
+#    - libatlas-base-dev
+#    - liblapack-dev
+#    - gfortran
+
+before_install:
+
+
+
+#- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+#  sudo apt-get -qq update;
+#
+#  sudo apt-get install python-dev libblas-dev libatlas-dev liblapack-dev gfortran g++ python-setuptools;
+#  sudo apt-get install libpng-dev libjpeg8-dev libfreetype6-dev libxft-dev;
+#  fi
+
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+        wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O anaconda.sh;
+        MAYOU_PYTHON_VERSION=$TRAVIS_PYTHON_VERSION;
+    elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+        MAYOU_PYTHON_VERSION="3.4";
+        wget https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O anaconda.sh;
+  fi
+#          wget https://repo.continuum.io/archive/Anaconda3-4.4.0-Linux-x86_64.sh -O anaconda.sh;
+#        wget https://repo.continuum.io/archive/Anaconda3-4.4.0-MacOSX-x86_64.sh -O anaconda.sh;
+#        wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O anaconda.sh;
+#        wget https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O anaconda.sh;
+
+
+- bash anaconda.sh -b -p $HOME/anaconda > tmp.txt && echo "alive"
+- export PATH="$HOME/anaconda/bin:$PATH"
+- hash -r
+- conda config --set always_yes yes --set changeps1 no
+#- conda update conda -y
+#- conda update anaconda -y
+
+- conda info -a
+#- conda config --add channels https://conda.anaconda.org/nlesc/label/dev
+
+- conda create -q --name=yamlloader-env python=$MAYOU_PYTHON_VERSION > tmp.txt && echo "alive"
+- source activate yamlloader-env
+
+# install test environment
+- conda install -y coverage > tmp.txt && echo "alive"
+- pip install coveralls > tmp.txt && echo "alive"
+
+install:
+#- pip install -r requirements.txt > tmp.txt && echo "alive"
+- pip install .
+
+script:
+
+#- python -m unittest discover
+#- coverage run -m unittest discover
+- echo "no tests yet"
+
+after_success:
+ - coveralls
+
+deploy:
+deploy:
+  provider: pypi
+  user: phynix
+  password:
+    secure: "K4sQLzchDacZK5q/fMndLO+max2cMSA+a+TEk3HCl9+ALo99E8ywBEQJPzoSDwC8/7O3HZA884I16pDMpTjX7TBMgvOTGwCGWISdCPJXy7h7exer4VzwU24V48S8cPLBp5Gw/5aMUmDGW9d9btTxccKT0F312DRszyM+uLOPAvdAv9J5FucVXWy87CjdNp3/W1U8N4rzBtsFKbG5zOn/xU4DH/BxwovUs9n/Jl2YC7UxG7dUV4qeY0vucMyhrXRHM9bh4zLxXdtNKoCuPSrE/z5R4qMD588+o/1j5em1TASriynTWQnQLkunJ6J1cZkZ8HRjcFdgK9wRO7Dlf2KAIrhPtl/R1dZVFaeY+QLQQVNTsTHzPrZpp6c+mdPk8GfQhy+oUEQ+4rZMt44WD8AhLZO6aPuM0+0BxLus0qZ+AHUZnJHh0GlmsHoMLBBrx4hf+emCip5EF4lY7lThHNSlnxRXKKoZyUf2njJShzCHQtvm3+keit+N9TfCKhzABGzldjWYDrtSVBCyW5Hvwrm/QICMDXf2r38qcF6+Tiea6IyQjs9Zn38T3/BeJPTHHIpIYP2jKmlvtqkhc3XsXAcTx8YF0VnL4gjZAkoVmQ/KoRjxZGHkSDm04CinYPoDgGDumsKomyhgzxWF494Wp1+UOEI8gGcSFsiQOH2C8EpVVDo="
+  distributions: sdist bdist_wheel
+  on:
+    branch: master
+    condition: $TRAVIS_PYTHON_VERSION = "3.4" && $TRAVIS_OS_NAME = "linux"
+
+
