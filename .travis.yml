@@ -69,7 +69,7 @@ before_install:
 
 # install test environment
 - conda install -y coverage > tmp.txt && echo "alive"
-- pip install coveralls > tmp.txt && echo "alive"
+- pip install coveralls > tmp.txt && echo "alive" || (exit 0)  # python26
 
 install:
 #- pip install -r requirements.txt > tmp.txt && echo "alive"
@@ -82,9 +82,8 @@ script:
 - echo "no tests yet"
 
 after_success:
- - coveralls
+ - coveralls || (exit 0)
 
-deploy:
 deploy:
   provider: pypi
   user: phynix
@@ -93,6 +92,6 @@ deploy:
   distributions: sdist bdist_wheel
   on:
     branch: master
-    condition: $TRAVIS_PYTHON_VERSION = "3.4" && $TRAVIS_OS_NAME = "linux"
+    condition: $TRAVIS_PYTHON_VERSION = "3.6" && $TRAVIS_OS_NAME = "linux"
 
 
