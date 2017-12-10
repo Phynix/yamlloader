@@ -1,5 +1,7 @@
 #sudo: required
-os: linux
+os:
+  - linux
+  - osx
 language: python
 python:
  - '2.6'
@@ -13,29 +15,8 @@ python:
 #    language: generic
 
 #cache: pip
-#sudo: required
-
-#matrix:
-#  allow_failures:
-#    - python: '2.7'
-#    - python: '3.5'
-#    - python: '3.6'
-
-
-#addons:
-#  apt:
-#    packages:
-#    - libatlas-dev
-#    - libatlas-base-dev
-#    - liblapack-dev
-#    - gfortran
 
 before_install:
-
-
-
-#- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-#  sudo apt-get -qq update;
 #
 #  sudo apt-get install python-dev libblas-dev libatlas-dev liblapack-dev gfortran g++ python-setuptools;
 #  sudo apt-get install libpng-dev libjpeg8-dev libfreetype6-dev libxft-dev;
@@ -58,11 +39,8 @@ before_install:
 - export PATH="$HOME/anaconda/bin:$PATH"
 - hash -r
 - conda config --set always_yes yes --set changeps1 no
-#- conda update conda -y
-#- conda update anaconda -y
 
 - conda info -a
-#- conda config --add channels https://conda.anaconda.org/nlesc/label/dev
 
 - conda create -q --name=yamlloader-env python=$MAYOU_PYTHON_VERSION > tmp.txt && echo "alive"
 - source activate yamlloader-env
@@ -79,6 +57,7 @@ script:
 
 #- python -m unittest discover
 #- coverage run -m unittest discover
+#- coverage run  --branch -m unittest discover
 - echo "no tests yet"
 
 after_success:
