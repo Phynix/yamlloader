@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function, division, absolute_import
 
-
-import sys
+import os
 from setuptools import setup
+
+here = os.path.abspath(os.path.dirname(__file__))
 
 requires = ['pyyaml']
 

@@ -3,6 +3,8 @@ from __future__ import print_function, division, absolute_import
 import contextlib
 import tempfile
 import copy
+import os
+from collections import OrderedDict
 from unittest import TestCase
 
 import atexit
@@ -10,20 +12,13 @@ import atexit
 import hypothesis
 from hypothesis import given, settings
 import hypothesis.strategies as st
-import sys
-
-import os
 import yaml
-
-if float('{:d}.{:d}'.format(*sys.version_info[:2])) < 2.7:
-    from ordereddict import OrderedDict
-else:
-    from collections import OrderedDict
 
 import yamlloader
 
 # long_settings = settings(max_examples=10, max_iterations=20, max_shrinks=10)
-long_settings = settings(max_examples=10000, max_iterations=20000, max_shrinks=10000,
+# long_settings = settings(max_examples=100, max_iterations=200, max_shrinks=100)
+long_settings = settings(max_examples=1000, max_iterations=2000, max_shrinks=1000,
                          timeout=hypothesis.unlimited)
 
 
