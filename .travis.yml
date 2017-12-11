@@ -48,6 +48,7 @@ before_install:
 # install test environment
 - conda install -y coverage > tmp.txt && echo "alive"
 - pip install coveralls > tmp.txt && echo "alive" || (exit 0)  # python26
+- pip install hypothesis
 
 install:
 #- pip install -r requirements.txt > tmp.txt && echo "alive"
