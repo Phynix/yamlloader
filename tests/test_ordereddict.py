@@ -17,9 +17,9 @@ import yaml
 import yamlloader
 
 # long_settings = settings(max_examples=10, max_iterations=20, max_shrinks=10)
-# long_settings = settings(max_examples=100, max_iterations=200, max_shrinks=100)
-long_settings = settings(max_examples=1000, max_iterations=2000, max_shrinks=1000,
-                         timeout=hypothesis.unlimited)
+long_settings = settings(max_examples=100, max_iterations=200, max_shrinks=100)
+# long_settings = settings(max_examples=1000, max_iterations=2000, max_shrinks=1000,
+#                          timeout=hypothesis.unlimited)
 
 
 def create_tempfile(suffix=None):
@@ -55,16 +55,17 @@ def temp_file():
     yield file_name
     os.remove(file_name)
 
+dict_keys_strat = st.text(average_size=6, min_size=1, max_size=25)
+dict_val_strat = st.text(average_size=10, min_size=1, max_size=10000)
 
 def extend_dict(strategy):
-    new_dict = st.dictionaries(keys=st.text(max_size=15), values=strategy,
-                               dict_class=OrderedDict)
+    new_dict = st.dictionaries(keys=copy.deepcopy(dict_keys_strat),
+                               values=strategy, dict_class=OrderedDict)
     return new_dict
 
 
-recursive_dict_strat = st.recursive(base=st.dictionaries(keys=st.text(max_size=15),
-                                                         values=st.text(average_size=10, min_size=1,
-                                                                        max_size=10000),
+recursive_dict_strat = st.recursive(base=st.dictionaries(keys=copy.deepcopy(dict_keys_strat),
+                                                         values=copy.deepcopy(dict_val_strat),
                                                          dict_class=OrderedDict),
                                     extend=extend_dict, max_leaves=30)
 
@@ -76,7 +77,12 @@ class TestLoaderDumper(TestCase):
         self.dumper = yamlloader.ordereddict.Dumper
         self.loaddump()
 
-    # def test_normalLoaderDumper(self):
+    def test_SafeLoaderDumper(self):
+        self.loader = yamlloader.ordereddict.SafeLoader
+        self.dumper = yamlloader.ordereddict.SafeDumper
+        self.loaddump()
+
+    # def test_normalCLoaderCDumper(self):
     #     self.loader = yamlloader.ordereddict.CLoader
     #     self.dumper = yamlloader.ordereddict.CDumper
     #     self.loaddump()
@@ -98,28 +104,16 @@ class TestLoaderDumper(TestCase):
 class TestAssumptions(TestCase):
 
     def setUp(self):
-        self.odict1 = OrderedDict([('a', [11, 12, 13]),
-                                   ('b', [21, 22, 23]),
-                                   ('c', [31, 32, 33]),
-                                   ('e', [21, 22, 23]),
-                                   ('d', [11, 12, 13]),
-                                   ('f',
-                                    OrderedDict([('a', [11, 12, 13]),
-                                                 ('b', [21, 22, 23]),
-                                                 ('c', [31, 32, 33]),
-                                                 ('e', [21, 22, 23]),
-                                                 ('d', [11, 12, 13])]))])
-        self.odict2 = OrderedDict([('a', [11, 12, 13]),
-                                   ('b', [21, 22, 23]),
-                                   ('c', [31, 32, 33]),
-                                   ('e', [21, 22, 23]),
-                                   ('d', [11, 12, 13]),
-                                   ('f',
-                                    OrderedDict([('a', [11, 12, 13]),
-                                                 ('b', [21, 22, 23]),
-                                                 ('c', [31, 32, 33]),
-                                                 ('d', [11, 12, 13]),
-                                                 ('e', [21, 22, 23])]))])
+        self.odict1 = OrderedDict(
+                [('a', [11, 12, 13]), ('b', [21, 22, 23]), ('c', [31, 32, 33]), ('e', [21, 22, 23]),
+                 ('d', [11, 12, 13]), ('f', OrderedDict(
+                        [('a', [11, 12, 13]), ('b', [21, 22, 23]), ('c', [31, 32, 33]),
+                         ('e', [21, 22, 23]), ('d', [11, 12, 13])]))])
+        self.odict2 = OrderedDict(
+                [('a', [11, 12, 13]), ('b', [21, 22, 23]), ('c', [31, 32, 33]), ('e', [21, 22, 23]),
+                 ('d', [11, 12, 13]), ('f', OrderedDict(
+                        [('a', [11, 12, 13]), ('b', [21, 22, 23]), ('c', [31, 32, 33]),
+                         ('d', [11, 12, 13]), ('e', [21, 22, 23])]))])
 
     def test_equality_assumptions(self):
         self.assertNotEqual(self.odict1, self.odict2)
