@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
+
+
 import sys
-from distutils.core import setup
+from setuptools import setup
 
 requires = ['pyyaml']
-if float('%d.%d' % sys.version_info[:2]) < 2.7:
+if float('{:d}.{:d}'.format(*sys.version_info[:2])) < 2.7:
     requires.append('ordereddict')
 
 def long_description():
@@ -18,7 +20,7 @@ setup(
     url='https://github.com/Phynix/yamlloader',
     download_url='https://github.com/Phynix/yamlloader',
     license='MIT License',
-    description='YAML loader and dump for PyYAML allowing to keep keys order.',
+    description='YAML loader and dumper for PyYAML allowing to keep keys order.',
     long_description=long_description(),
     keywords=['YAML', 'loader', 'dumper', 'ordered', 'OrderedDict', 'pyyaml'],
     classifiers=['Development Status :: 5 - Production/Stable',
