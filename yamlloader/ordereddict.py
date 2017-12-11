@@ -6,7 +6,7 @@ from __future__ import print_function, division, absolute_import
 import sys
 import yaml
 
-if float('{:d}.{:d}'.format(sys.version_info[:2])) < 2.7:
+if float('{:d}.{:d}'.format(*sys.version_info[:2])) < 2.7:
     from ordereddict import OrderedDict
 else:
     from collections import OrderedDict

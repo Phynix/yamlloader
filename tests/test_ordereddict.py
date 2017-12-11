@@ -65,23 +65,23 @@ def extend_dict(strategy):
 
 
 recursive_dict_strat = st.recursive(base=st.dictionaries(keys=st.text(max_size=15),
-                                                         values=st.text(max_size=100),
+                                                         values=st.text(average_size=10, min_size=1,
+                                                                        max_size=10000),
                                                          dict_class=OrderedDict),
-                                    extend=extend_dict, max_leaves=10)
+                                    extend=extend_dict, max_leaves=30)
 
 
 class TestLoaderDumper(TestCase):
 
     def test_normalLoaderDumper(self):
-        self.loader=yamlloader.ordereddict.Loader
-        self.dumper=yamlloader.ordereddict.Dumper
+        self.loader = yamlloader.ordereddict.Loader
+        self.dumper = yamlloader.ordereddict.Dumper
         self.loaddump()
 
     # def test_normalLoaderDumper(self):
     #     self.loader = yamlloader.ordereddict.CLoader
     #     self.dumper = yamlloader.ordereddict.CDumper
     #     self.loaddump()
-
 
     @long_settings
     @given(recursive_dict_strat)
@@ -95,11 +95,6 @@ class TestLoaderDumper(TestCase):
         dumbed_dict = yaml.dump(dict_to_save, Dumper=self.dumper)
         dict_loaded = yaml.load(dumbed_dict, Loader=self.loader)
         self.assertEqual(dict_to_save, dict_loaded)
-
-    @long_settings
-    @given(recursive_dict_strat)
-    def test_print(self, recursive_dict_strat):
-        self.assertFalse(len(recursive_dict_strat)>10)
 
 
 class TestAssumptions(TestCase):

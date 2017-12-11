@@ -56,9 +56,9 @@ install:
 script:
 
 #- python -m unittest discover
-#- coverage run -m unittest discover
-#- coverage run  --branch -m unittest discover
-- echo "no tests yet"
+- coverage run -m unittest discover
+- coverage run  --branch -m unittest discover
+#- echo "no tests yet"
 
 after_success:
  - coveralls || (exit 0)
