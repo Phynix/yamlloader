@@ -1,4 +1,5 @@
-#sudo: required
+stages:
+  - test
 os:
   - linux
 #  - osx
@@ -17,52 +18,23 @@ matrix:
 #cache: pip
 
 before_install:
-#
-#  sudo apt-get install python-dev libblas-dev libatlas-dev liblapack-dev gfortran g++ python-setuptools;
-#  sudo apt-get install libpng-dev libjpeg8-dev libfreetype6-dev libxft-dev;
-#  fi
 
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-        wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O anaconda.sh;
-        MAYOU_PYTHON_VERSION=$TRAVIS_PYTHON_VERSION;
-    elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-        MAYOU_PYTHON_VERSION="3.6";
-        wget https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O anaconda.sh;
-  fi
-#          wget https://repo.continuum.io/archive/Anaconda3-4.4.0-Linux-x86_64.sh -O anaconda.sh;
-#        wget https://repo.continuum.io/archive/Anaconda3-4.4.0-MacOSX-x86_64.sh -O anaconda.sh;
-#        wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O anaconda.sh;
-#        wget https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O anaconda.sh;
+- bash ci/install_conda.sh
 
-
-- bash anaconda.sh -b -p $HOME/anaconda > tmp.txt && echo "alive"
-- export PATH="$HOME/anaconda/bin:$PATH"
-- hash -r
-- conda config --set always_yes yes --set changeps1 no
-
-- conda info -a
-
-- conda create -q --name=yamlloader-env python=$MAYOU_PYTHON_VERSION > tmp.txt && echo "alive"
-- source activate yamlloader-env
-
-# install test environment
-- conda install -y coverage > tmp.txt && echo "alive"
-- pip install coveralls > tmp.txt && echo "alive" || (exit 0)  # python26
-- pip install hypothesis
+- bash ci/setup_env.sh
 
 install:
-#- pip install -r requirements.txt > tmp.txt && echo "alive"
 - pip install .
 
 script:
+- bash ci/install_tester.sh
 
-#- python -m unittest discover
-- coverage run -m unittest discover
-- coverage run  --branch -m unittest discover
-#- echo "no tests yet"
+- bash ci/run_tests.sh
 
 after_success:
- - coveralls || (exit 0)
+- if [[ "$PHYNIX_PYTHON_VERSION" > 2.6 ]]; then
+    coveralls;
+  fi
 
 deploy:
   provider: pypi

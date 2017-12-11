@@ -20,8 +20,8 @@ else:
 
 import yamlloader
 
-long_settings = settings(max_examples=1000, max_iterations=20,
-                         max_shrinks=10000)
+long_settings = settings(max_examples=10, max_iterations=20,
+                         max_shrinks=10)
 
 
 def create_tempfile(suffix=None):
