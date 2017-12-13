@@ -53,5 +53,5 @@ deploy:
     local_dir: docs/api/_build/html
     on:
 #    HACK
-      branch: feature/add_CLoaders
+      branch: master
       condition: $TRAVIS_PYTHON_VERSION = "3.6" && $TRAVIS_OS_NAME = "linux"
