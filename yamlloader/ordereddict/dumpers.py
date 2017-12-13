@@ -1,8 +1,13 @@
+"""Dumpers for `:py:class:~collections.OrderedDict`"""
+
+from __future__ import print_function, division, absolute_import
+
 import yaml
 
 from collections import OrderedDict
 
 __all__ = []
+
 
 def represent_ordereddict(self, data):
     return self.represent_mapping('tag:yaml.org,2002:map', data.items())
@@ -24,8 +29,9 @@ class OrderedDumperMixin(object):
 doc_extension_Cversion = """
     
     The C version is preferable over the non-C version as they
-    do equivalent things while the C version just being faster.  
+    do equivalent things while the C version is faster.  
     """
+
 
 class Dumper(OrderedDumperMixin, yaml.Dumper):
     pass
@@ -35,8 +41,10 @@ class SafeDumper(OrderedDumperMixin, yaml.SafeDumper):
     __doc__ = """
     """
 
+
 class CDumper(OrderedDumperMixin, yaml.CDumper):
     __doc__ = doc_extension_Cversion
+
 
 class CSafeDumper(OrderedDumperMixin, yaml.CSafeDumper):
     __doc__ = doc_extension_Cversion

@@ -1,3 +1,10 @@
+"""
+Several different loaders and dumpers for YAML under Python are implemented in the
+respective submodules.
+
+
+"""
+
 from __future__ import print_function, division, absolute_import
 
 import sys
