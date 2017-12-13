@@ -36,13 +36,17 @@ after_success:
 
 
 deploy:
-  provider: pypi
-  user: phynix
-  password:
-    secure: "K4sQLzchDacZK5q/fMndLO+max2cMSA+a+TEk3HCl9+ALo99E8ywBEQJPzoSDwC8/7O3HZA884I16pDMpTjX7TBMgvOTGwCGWISdCPJXy7h7exer4VzwU24V48S8cPLBp5Gw/5aMUmDGW9d9btTxccKT0F312DRszyM+uLOPAvdAv9J5FucVXWy87CjdNp3/W1U8N4rzBtsFKbG5zOn/xU4DH/BxwovUs9n/Jl2YC7UxG7dUV4qeY0vucMyhrXRHM9bh4zLxXdtNKoCuPSrE/z5R4qMD588+o/1j5em1TASriynTWQnQLkunJ6J1cZkZ8HRjcFdgK9wRO7Dlf2KAIrhPtl/R1dZVFaeY+QLQQVNTsTHzPrZpp6c+mdPk8GfQhy+oUEQ+4rZMt44WD8AhLZO6aPuM0+0BxLus0qZ+AHUZnJHh0GlmsHoMLBBrx4hf+emCip5EF4lY7lThHNSlnxRXKKoZyUf2njJShzCHQtvm3+keit+N9TfCKhzABGzldjWYDrtSVBCyW5Hvwrm/QICMDXf2r38qcF6+Tiea6IyQjs9Zn38T3/BeJPTHHIpIYP2jKmlvtqkhc3XsXAcTx8YF0VnL4gjZAkoVmQ/KoRjxZGHkSDm04CinYPoDgGDumsKomyhgzxWF494Wp1+UOEI8gGcSFsiQOH2C8EpVVDo="
-  distributions: sdist bdist_wheel
-  on:
-    branch: master
-    condition: $TRAVIS_PYTHON_VERSION = "3.6" && $TRAVIS_OS_NAME = "linux"
+  - provider: pypi
+    user: phynix
+    password:
+      secure: "K4sQLzchDacZK5q/fMndLO+max2cMSA+a+TEk3HCl9+ALo99E8ywBEQJPzoSDwC8/7O3HZA884I16pDMpTjX7TBMgvOTGwCGWISdCPJXy7h7exer4VzwU24V48S8cPLBp5Gw/5aMUmDGW9d9btTxccKT0F312DRszyM+uLOPAvdAv9J5FucVXWy87CjdNp3/W1U8N4rzBtsFKbG5zOn/xU4DH/BxwovUs9n/Jl2YC7UxG7dUV4qeY0vucMyhrXRHM9bh4zLxXdtNKoCuPSrE/z5R4qMD588+o/1j5em1TASriynTWQnQLkunJ6J1cZkZ8HRjcFdgK9wRO7Dlf2KAIrhPtl/R1dZVFaeY+QLQQVNTsTHzPrZpp6c+mdPk8GfQhy+oUEQ+4rZMt44WD8AhLZO6aPuM0+0BxLus0qZ+AHUZnJHh0GlmsHoMLBBrx4hf+emCip5EF4lY7lThHNSlnxRXKKoZyUf2njJShzCHQtvm3+keit+N9TfCKhzABGzldjWYDrtSVBCyW5Hvwrm/QICMDXf2r38qcF6+Tiea6IyQjs9Zn38T3/BeJPTHHIpIYP2jKmlvtqkhc3XsXAcTx8YF0VnL4gjZAkoVmQ/KoRjxZGHkSDm04CinYPoDgGDumsKomyhgzxWF494Wp1+UOEI8gGcSFsiQOH2C8EpVVDo="
+    distributions: sdist bdist_wheel
+    on:
+      branch: master
+      condition: $TRAVIS_PYTHON_VERSION = "3.6" && $TRAVIS_OS_NAME = "linux"
 
-
+  - provider: pages
+    skip_cleanup: true
+    github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
+#    on:
+#      branch: master
