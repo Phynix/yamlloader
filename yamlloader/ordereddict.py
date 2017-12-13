@@ -6,10 +6,11 @@ from __future__ import print_function, division, absolute_import
 import sys
 import yaml
 
-if float('{:d}.{:d}'.format(sys.version_info[:2])) < 2.7:
-    from ordereddict import OrderedDict
-else:
-    from collections import OrderedDict
+if sys.version_info[:2] < (2, 7):
+    raise RuntimeError("You are using Python < 2.7. This is not supported. "
+                       "Please upgrade your distribution and/or packages.")
+
+from collections import OrderedDict
 
 __all__ = ['CLoader',
            'Loader',
