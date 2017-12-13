@@ -1,4 +1,4 @@
-"""Loaders for `:py:class:~collections.OrderedDict`"""
+"""Loaders for `:py:class:~collections.OrderedDict`."""
 
 from __future__ import print_function, division, absolute_import
 

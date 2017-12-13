@@ -1,4 +1,4 @@
-"""Dumpers for `:py:class:~collections.OrderedDict`"""
+"""Dumpers for `:py:class:~collections.OrderedDict`."""
 
 from __future__ import print_function, division, absolute_import
 
@@ -27,7 +27,7 @@ class OrderedDumperMixin(object):
 
 
 doc_extension_Cversion = """
-    
+
     The C version is preferable over the non-C version as they
     do equivalent things while the C version is faster.  
     """

@@ -12,6 +12,7 @@ with io.open(os.path.join(here, 'requirements.txt')) as f:
 
 
 def long_description():
+    """Load README.rst."""
     with open('README.rst', 'r') as f:
         return f.read()
 

@@ -9,7 +9,7 @@ n_files = 0
 for rest_file in parsed_args.files:
     with open(rest_file, 'r') as f:
         first_word = f.readline().strip().split()[0]
-        if not '.' in first_word:
+        if '.' not in first_word:
             continue
         replacement = first_word.split('.')[-1]
         underline = f.readline()[0] * len(replacement)
