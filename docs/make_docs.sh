@@ -9,4 +9,4 @@ popd > /dev/null
 sphinx-apidoc -o ${MAKE_DOCS_PATH}/api ${MAKE_DOCS_PATH}/../yamlloader  -fMeT && \
 python ${MAKE_DOCS_PATH}/api/tools/change_headline.py ${MAKE_DOCS_PATH}/api/yamlloader.* && \
 make -C ${MAKE_DOCS_PATH}/api clean && make -C ${MAKE_DOCS_PATH}/api html -j4 && \
-echo "Documentation successfully build!" || echo "FAILED to build Documentation"
+echo "Documentation successfully built!" || echo "FAILED to build Documentation"
