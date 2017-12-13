@@ -29,7 +29,7 @@ script:
 
 - . ci/run_tests.sh
 
-- . ci/testbuild-docs.sh
+- . ci/testbuild_docs.sh
 
 after_success:
 - coveralls
