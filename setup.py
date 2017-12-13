@@ -16,9 +16,10 @@ def long_description():
         return f.read()
 
 
-setup(name='yamlloader', version='0.4.1',
-      author='Jonas Eschle "Mayou36"',  # 'François Ménabé',
-      author_email='jonas.eschle@phynix.science',  # 'francois.menabe@gmail.com',
+setup(name='yamlloader',
+      version='0.4.1',
+      author='Jonas Eschle "Mayou36"',
+      author_email='jonas.eschle@phynix.science',
       maintainer='Jonas Eschle "Mayou36"',
       maintainer_email='jonas.eschle@phynix.science',
       url='https://github.com/Phynix/yamlloader',

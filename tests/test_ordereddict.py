@@ -18,6 +18,8 @@ import yamlloader
 
 # long_settings = settings(max_examples=10, max_iterations=20, max_shrinks=10)
 long_settings = settings(max_examples=100, max_iterations=200, max_shrinks=100)
+
+
 # long_settings = settings(max_examples=1000, max_iterations=2000, max_shrinks=1000,
 #                          timeout=hypothesis.unlimited)
 
@@ -55,8 +57,14 @@ def temp_file():
     yield file_name
     os.remove(file_name)
 
+
 dict_keys_strat = st.text(average_size=6, min_size=1, max_size=25)
-dict_val_strat = st.text(average_size=10, min_size=1, max_size=10000)
+dict_val_strat = st.one_of(st.text(average_size=10, min_size=1, max_size=10000), st.integers(),
+                           st.floats(allow_nan=False, allow_infinity=False),
+                           st.lists(st.one_of(st.text(max_size=10),
+                                              st.floats(allow_nan=False, allow_infinity=False),
+                                              st.integers())))
+
 
 def extend_dict(strategy):
     new_dict = st.dictionaries(keys=copy.deepcopy(dict_keys_strat),
@@ -68,19 +76,30 @@ recursive_dict_strat = st.recursive(base=st.dictionaries(keys=copy.deepcopy(dict
                                                          values=copy.deepcopy(dict_val_strat),
                                                          dict_class=OrderedDict),
                                     extend=extend_dict, max_leaves=30)
-
+loaders = [yamlloader.ordereddict.Loader, yamlloader.ordereddict.SafeLoader]
+dumpers = [yamlloader.ordereddict.Dumper, yamlloader.ordereddict.SafeDumper]
 
 class TestLoaderDumper(TestCase):
 
-    def test_normalLoaderDumper(self):
-        self.loader = yamlloader.ordereddict.Loader
-        self.dumper = yamlloader.ordereddict.Dumper
-        self.loaddump()
+    # def test_normalLoaderDumper(self):
+    #     self.loader = yamlloader.ordereddict.Loader
+    #     self.dumper = yamlloader.ordereddict.Dumper
+    #     self.loaddump()
+    #
+    # def test_SafeLoaderDumper(self):
+    #     self.loader = yamlloader.ordereddict.SafeLoader
+    #     self.dumper = yamlloader.ordereddict.SafeDumper
+    #     self.loaddump()
 
-    def test_SafeLoaderDumper(self):
-        self.loader = yamlloader.ordereddict.SafeLoader
-        self.dumper = yamlloader.ordereddict.SafeDumper
-        self.loaddump()
+    def set_LoadersDumbers(self, loader, dumper):
+        self.loader = loader
+        self.dumper = dumper
+
+    def test_SafeLoadCombinations(self):
+        for dumper in dumpers:
+            for loader in loaders:
+                self.set_LoadersDumbers(loader=loader, dumper=dumper)
+                self.loaddump()
 
     # def test_normalCLoaderCDumper(self):
     #     self.loader = yamlloader.ordereddict.CLoader
