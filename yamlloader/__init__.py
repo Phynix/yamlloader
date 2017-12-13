@@ -2,6 +2,7 @@ from __future__ import print_function, division, absolute_import
 
 import sys
 
+__version__ = "0.4.1"
 __author__ = "Jonas Eschle"
 __email__ = "jonas.eschle@phynix.science"
 
@@ -10,3 +11,5 @@ if sys.version_info[:2] < (2, 7):
                        "Please upgrade your distribution and/or packages.")
 
 from . import ordereddict
+
+__all__ = ['ordereddict']

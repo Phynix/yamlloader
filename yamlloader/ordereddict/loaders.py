@@ -2,6 +2,7 @@ import yaml
 
 from collections import OrderedDict
 
+__all__ = []
 
 def construct_yaml_map(self, node):
     data = OrderedDict()

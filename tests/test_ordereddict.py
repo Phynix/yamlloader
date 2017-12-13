@@ -103,8 +103,8 @@ class TestLoaderDumper(TestCase):
 
     def test_SafeLoadCombinations(self):
         for loader, dumper in loaderdumper:
-                self.set_LoadersDumpers(loader=loader, dumper=dumper)
-                self.loaddump()
+            self.set_LoadersDumpers(loader=loader, dumper=dumper)
+            self.loaddump()
 
     # def test_normalCLoaderCDumper(self):
     #     self.loader = yamlloader.ordereddict.CLoader
