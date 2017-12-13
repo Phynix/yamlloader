@@ -1,3 +1,7 @@
+.. image:: https://travis-ci.org/Phynix/yamlloader.svg?branch=master
+    :target: https://travis-ci.org/Phynix/yamlloader
+
+
 yamlloader
 ==========
 
