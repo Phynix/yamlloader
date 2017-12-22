@@ -12,6 +12,7 @@ with io.open(os.path.join(here, 'requirements.txt')) as f:
 
 
 def long_description():
+    """Load README.rst."""
     with open('README.rst', 'r') as f:
         return f.read()
 
@@ -36,7 +37,7 @@ setup(name='yamlloader',
                    'Programming Language :: Python :: 3.4',
                    'Programming Language :: Python :: 3.5',
                    'Programming Language :: Python :: 3.6', 'Topic :: Utilities'],
-      packages=['yamlloader'],
+      packages=['yamlloader', 'yamlloader.ordereddict'],
       python_requires=">=2.7",
       install_requires=requirements,
       zip_safe=False

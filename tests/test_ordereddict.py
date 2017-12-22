@@ -4,10 +4,10 @@ import contextlib
 import tempfile
 import copy
 import os
+import sys
+import atexit
 from collections import OrderedDict
 from unittest import TestCase
-
-import atexit
 
 import hypothesis
 from hypothesis import given, settings
@@ -79,6 +79,12 @@ recursive_dict_strat = st.recursive(base=st.dictionaries(keys=copy.deepcopy(dict
 loaders = [yamlloader.ordereddict.Loader, yamlloader.ordereddict.SafeLoader]
 dumpers = [yamlloader.ordereddict.Dumper, yamlloader.ordereddict.SafeDumper]
 
+loaderdumper = [(l, d) for l in loaders for d in dumpers]
+
+if sys.version_info[:2] == (2, 7):  # SafeLoader cannot load unicode in Python 2
+    loaderdumper.remove((yamlloader.ordereddict.SafeLoader, yamlloader.ordereddict.Dumper))
+
+
 class TestLoaderDumper(TestCase):
 
     # def test_normalLoaderDumper(self):
@@ -91,15 +97,14 @@ class TestLoaderDumper(TestCase):
     #     self.dumper = yamlloader.ordereddict.SafeDumper
     #     self.loaddump()
 
-    def set_LoadersDumbers(self, loader, dumper):
+    def set_LoadersDumpers(self, loader, dumper):
         self.loader = loader
         self.dumper = dumper
 
     def test_SafeLoadCombinations(self):
-        for dumper in dumpers:
-            for loader in loaders:
-                self.set_LoadersDumbers(loader=loader, dumper=dumper)
-                self.loaddump()
+        for loader, dumper in loaderdumper:
+            self.set_LoadersDumpers(loader=loader, dumper=dumper)
+            self.loaddump()
 
     # def test_normalCLoaderCDumper(self):
     #     self.loader = yamlloader.ordereddict.CLoader

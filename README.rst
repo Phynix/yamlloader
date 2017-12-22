@@ -1,7 +1,18 @@
+.. image:: https://travis-ci.org/Phynix/yamlloader.svg?branch=master
+    :target: https://travis-ci.org/Phynix/yamlloader
+
+.. image:: https://landscape.io/github/Phynix/yamlloader/master/landscape.svg?style=flat
+    :target: https://landscape.io/github/Phynix/yamlloader/master
+   :alt: Code Health
+
+.. image:: https://www.versioneye.com/user/projects/5a2f00060fb24f07e40988bf/badge.svg?style=flat-square
+    :target: https://www.versioneye.com/user/projects/5a2f00060fb24f07e40988bf
+    :alt: Dependency Status
+
 yamlloader
 ==========
 
-This project was mirrored from `yamlordereddict <https://github.com/fmenabe/python-yamlordereddictloader>_
+This project was mirrored from `yamlordereddict <https://github.com/fmenabe/python-yamlordereddictloader>`_
 Many thanks to the original author François Ménabé!
 
 
@@ -9,6 +20,8 @@ Many thanks to the original author François Ménabé!
 This module provides loaders and dumpers for PyYAML. Currently, an OrderedDict loader/dumper is
  implemented, allowing to keep items order
 when loading resp. dumping a file.
+
+`API Documentation <https://phynix.github.io/yamlloader/index.html>`_
 
 
 To install it
