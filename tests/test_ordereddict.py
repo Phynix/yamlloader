@@ -22,23 +22,23 @@ long_settings = settings(max_examples=100, max_iterations=200, max_shrinks=100)
 # long_settings = settings(max_examples=1000, max_iterations=2000, max_shrinks=1000,
 #                          timeout=hypothesis.unlimited)
 
-
-def create_tempfile(suffix=None):
-    """Create a temporary file and remove it on exit "guaranteed".
-
-    Returns:
-        tuple(os handle, str): Returns same objects as :py:func:`tempfile.mkstemp`.
-    """
-
-    try:
-        os_handle, filename = tempfile.mkstemp(suffix=suffix)
-    except Exception:  # aiming at interruptions
-        print("Exception occurred while creating a temp-file")
-        raise
-    finally:
-        atexit.register(cleanup_file, filename)
-
-    return os_handle, filename
+#
+# def create_tempfile(suffix=None):
+#     """Create a temporary file and remove it on exit "guaranteed".
+#
+#     Returns:
+#         tuple(os handle, str): Returns same objects as :py:func:`tempfile.mkstemp`.
+#     """
+#
+#     try:
+#         os_handle, filename = tempfile.mkstemp(suffix=suffix)
+#     except Exception:  # aiming at interruptions
+#         print("Exception occurred while creating a temp-file")
+#         raise
+#     finally:
+#         atexit.register(cleanup_file, filename)
+#
+#     return os_handle, filename
 
 #
 # def cleanup_file(filename):
@@ -49,12 +49,12 @@ def create_tempfile(suffix=None):
 #         pass  # file was not created at all
 
 
-@contextlib.contextmanager
-def temp_file():
-    """Create temporary files, cleanup after exit"""
-    _, file_name = create_tempfile()
-    yield file_name
-    os.remove(file_name)
+# @contextlib.contextmanager
+# def temp_file():
+#     """Create temporary files, cleanup after exit"""
+#     _, file_name = create_tempfile()
+#     yield file_name
+#     os.remove(file_name)
 
 
 dict_keys_strat = st.text(average_size=6, min_size=1, max_size=25)
