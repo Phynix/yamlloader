@@ -9,7 +9,6 @@ import atexit
 from collections import OrderedDict
 from unittest import TestCase
 
-import hypothesis
 from hypothesis import given, settings
 import hypothesis.strategies as st
 import yaml
@@ -41,13 +40,13 @@ def create_tempfile(suffix=None):
 
     return os_handle, filename
 
-
-def cleanup_file(filename):
-    """Remove a file if exists."""
-    try:
-        os.remove(filename)
-    except FileNotFoundError as error:
-        pass  # file was not created at all
+#
+# def cleanup_file(filename):
+#     """Remove a file if exists."""
+#     try:
+#         os.remove(filename)
+#     except FileNotFoundError as error:
+#         pass  # file was not created at all
 
 
 @contextlib.contextmanager
