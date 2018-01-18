@@ -16,10 +16,10 @@ import yaml
 
 import yamlloader
 
-# long_settings = settings(max_examples=10, max_iterations=20, max_shrinks=10,
-#                          timeout=hypothesis.unlimited)
-long_settings = settings(max_examples=100, max_iterations=200, max_shrinks=100,
+long_settings = settings(max_examples=10, max_iterations=20, max_shrinks=10,
                          timeout=hypothesis.unlimited)
+# long_settings = settings(max_examples=100, max_iterations=200, max_shrinks=100,
+#                          timeout=hypothesis.unlimited)
 
 ASCII_CODEPOINT = 126
 
