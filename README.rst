@@ -13,13 +13,12 @@ yamlloader
 ==========
 
 This project was mirrored from `yamlordereddict <https://github.com/fmenabe/python-yamlordereddictloader>`_
-Many thanks to the original author François Ménabé!
-
-
+Many thanks to the original author François Ménabé! It contains several improvements including
+the much faster C-versions of the Loaders/Dumpers.
 
 This module provides loaders and dumpers for PyYAML. Currently, an OrderedDict loader/dumper is
- implemented, allowing to keep items order
-when loading resp. dumping a file.
+implemented, allowing to keep items order
+when loading resp. dumping a file from/to an OrderedDict.
 
 `API Documentation <https://phynix.github.io/yamlloader/index.html>`_
 
@@ -39,8 +38,8 @@ or
     $ conda install yamlloader -c phynix
 
 
-But does [your special case] also work?
----------------------------------------
+But does [your special case here] also work?
+--------------------------------------------
 
 Tests are run continuously using randomly generated yaml files.
 Also, there are no fails to be expected.
