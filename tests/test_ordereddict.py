@@ -9,6 +9,7 @@ import atexit
 from collections import OrderedDict
 from unittest import TestCase
 
+import hypothesis
 from hypothesis import given, settings
 import hypothesis.strategies as st
 import yaml
