@@ -11,7 +11,6 @@ Welcome to yamlloader's documentation!
    :maxdepth: 1
    :caption: Contents:
 
-   yamlloader.ordereddict
    yamlloader
 
 

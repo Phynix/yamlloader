@@ -8,7 +8,8 @@ strictness: veryhigh
 #    - redefined-builtin
 
 ignore-paths:
-  - docs/*
+  - docs/
+  - tests/
 python-targets:
  - 2
  - 3

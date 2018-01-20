@@ -31,7 +31,6 @@ if 'TRAVIS' in os.environ:  # set settings for CI
     long_settings = settings(max_examples=300, max_iterations=1000, max_shrinks=10000,
                              timeout=hypothesis.unlimited)
 
-
 # def create_tempfile(suffix=None):
 #     """Create a temporary file and remove it on exit "guaranteed".
 #
@@ -48,7 +47,7 @@ if 'TRAVIS' in os.environ:  # set settings for CI
 #         atexit.register(cleanup_file, filename)
 #
 #     return os_handle, filename
-#
+
 #
 # def cleanup_file(filename):
 #     """Remove a file if exists."""
@@ -56,8 +55,7 @@ if 'TRAVIS' in os.environ:  # set settings for CI
 #         os.remove(filename)
 #     except FileNotFoundError as error:
 #         pass  # file was not created at all
-#
-#
+
 # @contextlib.contextmanager
 # def temp_file():
 #     """Create temporary files, cleanup after exit"""
@@ -139,6 +137,7 @@ yaml_dumpers = {yamlloader.ordereddict.Dumper: yaml.Dumper,
 
 safe_loaders = [yamlloader.ordereddict.SafeLoader, yamlloader.ordereddict.CSafeLoader]
 safe_dumpers = [yamlloader.ordereddict.SafeDumper, yamlloader.ordereddict.CSafeDumper]
+
 
 loaderdumper = [(l, d) for l in loaders for d in dumpers]
 
