@@ -29,7 +29,8 @@ ASCII_CODEPOINT = 126
 
 if 'TRAVIS' in os.environ:  # set settings for CI
     long_settings = settings(max_examples=300, max_iterations=1000, max_shrinks=10000,
-                             timeout=hypothesis.unlimited)
+                             timeout=hypothesis.unlimited,
+                             suppress_health_check=(hypothesis.HealthCheck.too_slow,))
 
 # def create_tempfile(suffix=None):
 #     """Create a temporary file and remove it on exit "guaranteed".
