@@ -18,7 +18,7 @@ def long_description():
 
 
 setup(name='yamlloader',
-      version='0.5.0',
+      version='0.5.1',
       author='Jonas Eschle "Mayou36"',
       author_email='jonas.eschle@phynix.science',
       maintainer='Jonas Eschle "Mayou36"',
