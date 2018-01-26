@@ -12,13 +12,17 @@
 yamlloader
 ==========
 
-This project was mirrored from `yamlordereddict <https://github.com/fmenabe/python-yamlordereddictloader>`_
-Many thanks to the original author François Ménabé! It contains several improvements including
-the much faster C-versions of the Loaders/Dumpers.
 
 This module provides loaders and dumpers for PyYAML. Currently, an OrderedDict loader/dumper is
 implemented, allowing to keep items order
 when loading resp. dumping a file from/to an OrderedDict.
+
+This project was originally mirrored from
+`yamlordereddict <https://github.com/fmenabe/python-yamlordereddictloader>`_
+Many thanks to the original author François Ménabé!
+The library contains several improvements including automated testing and
+ the much faster C-versions of the Loaders/Dumpers.
+
 
 `API Documentation <https://phynix.github.io/yamlloader/index.html>`_
 
@@ -57,11 +61,14 @@ Loader usage
     import yaml
     import yamlloader
 
-    data = yaml.load(open('myfile.yml'), Loader=yamlloader.ordereddict.CLoader)  # CLoader is faster than Loader
+    with open('myfile.yml') as yaml_file:
+        data = yaml.load(yaml_file,
+                         Loader=yamlloader.ordereddict.CLoader)
+                         # CLoader is faster than Loader
 
 **Note:** For using the safe loader (which takes standard YAML tags and does
-not construct arbitrary Python objects), replace ``yamlorderdictloader.CLoader`` by
-``yamlorderedictloader.CSafeLoader``.
+not construct arbitrary Python objects), replace ``yamlloader.ordereddict.CLoader`` by
+``yamlloader.ordereddict.CSafeLoader``.
 
 Dumper usage
 ------------
@@ -72,15 +79,14 @@ Dumper usage
     import yamlloader
     from collections import OrderedDict
 
-    data = OrderedDict([
-        ('key1', 'val1'),
-        ('key2', OrderedDict([('key21', 'val21'), ('key22', 'val22')]))
-    ])
-    yaml.dump(data,
-              open('myfile.yml', 'w'),
-              Dumper=yamlloader.ordereddict.CDumper,
-              default_flow_style=False)
+    data = OrderedDict([('key1', 'val1'),
+                        ('key2', OrderedDict([('key21', 'val21'),
+                                              ('key22', 'val22')]))])
+
+    with open('myfile.yaml', 'w') as yaml_file:
+        yaml.dump(data, yaml_file,
+                  Dumper=yamlloader.ordereddict.CDumper)
 
 **Note:** For using the safe dumper (which produce standard YAML tags and does
-not represent arbitrary Python objects), replace ``yamlorderdictloader.Dumper`` by
-``yamlorderedictloader.SafeDumper``.
+not represent arbitrary Python objects), replace ``yamlloader.ordereddict.CDumper`` by
+``yamlloader.ordereddict.CSafeDumper``.
