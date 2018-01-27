@@ -21,7 +21,7 @@ This project was originally mirrored from
 `yamlordereddict <https://github.com/fmenabe/python-yamlordereddictloader>`_
 Many thanks to the original author François Ménabé!
 The library contains several improvements including automated testing and
- the much faster C-versions of the Loaders/Dumpers.
+the much faster C-versions of the Loaders/Dumpers.
 
 
 `API Documentation <https://phynix.github.io/yamlloader/index.html>`_
