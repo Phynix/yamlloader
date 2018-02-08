@@ -56,8 +56,16 @@ class SafeLoader(OrderedLoaderMixin, yaml.SafeLoader):
     pass
 
 
+if not hasattr(yaml, 'CLoader'):
+    yaml.CLoader = yaml.Loader
+
+
 class CLoader(OrderedLoaderMixin, yaml.CLoader):
     pass
+
+
+if not hasattr(yaml, 'CSafeLoader'):
+    yaml.CSafeLoader = yaml.SafeLoader
 
 
 class CSafeLoader(OrderedLoaderMixin, yaml.CSafeLoader):

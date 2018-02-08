@@ -53,6 +53,17 @@ add your own tests as `test_ext_anyname.py` under `tests/` or let us know about 
 This guarantees that no code will be added that breaks *your* case.
 
 
+C vs non-C version
+------------------
+
+A significant speedup can be reached by replacing the Loader* and Dumper* classes by CLoader*
+and CDumper*. The package hereby relies on the implementations from PyYAML. If they have not
+been compiled, *yamlloader* automatically falls back to the non-C versions.
+
+Therefore using the C-version is safe: if it is not available, the pure Python version is
+automatically used.
+
+
 Loader usage
 ------------
 

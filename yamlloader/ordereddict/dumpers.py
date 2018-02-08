@@ -42,9 +42,17 @@ class SafeDumper(OrderedDumperMixin, yaml.SafeDumper):
     """
 
 
+if not hasattr(yaml, 'CDumper'):
+    yaml.CDumper = yaml.Dumper
+
+
+
 class CDumper(OrderedDumperMixin, yaml.CDumper):
     __doc__ = doc_extension_Cversion
 
+
+if not hasattr(yaml, 'CSafeDumper'):
+    yaml.CSafeDumper = yaml.SafeDumper
 
 class CSafeDumper(OrderedDumperMixin, yaml.CSafeDumper):
     __doc__ = doc_extension_Cversion
