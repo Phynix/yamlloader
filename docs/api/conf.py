@@ -57,7 +57,7 @@ extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.viewcode',
               'sphinx.ext.githubpages']
 
-html_logo = os.path.join(here, 'static/img/phynix_logo_medium.png')  # TODO: insert image?
+html_logo = os.path.join(here, 'static/img/phynix_logo_medium.png')
 
 # Napoleon settings (convert numpy/google docstrings to proper ReST
 napoleon_google_docstring = False

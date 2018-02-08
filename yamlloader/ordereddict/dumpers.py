@@ -6,6 +6,8 @@ import yaml
 
 from collections import OrderedDict
 
+import yamlloader.settings
+
 __all__ = []
 
 
@@ -42,7 +44,7 @@ class SafeDumper(OrderedDumperMixin, yaml.SafeDumper):
     """
 
 
-if not hasattr(yaml, 'CDumper'):
+if not hasattr(yaml, 'CDumper') and yamlloader.settings.ALLOW_NON_C_FALLBACK:
     yaml.CDumper = yaml.Dumper
 
 
@@ -51,7 +53,7 @@ class CDumper(OrderedDumperMixin, yaml.CDumper):
     __doc__ = doc_extension_Cversion
 
 
-if not hasattr(yaml, 'CSafeDumper'):
+if not hasattr(yaml, 'CSafeDumper') and yamlloader.settings.ALLOW_NON_C_FALLBACK:
     yaml.CSafeDumper = yaml.SafeDumper
 
 class CSafeDumper(OrderedDumperMixin, yaml.CSafeDumper):
