@@ -6,6 +6,8 @@ import yaml
 
 from collections import OrderedDict
 
+import yamlloader.settings
+
 __all__ = []
 
 
@@ -56,8 +58,16 @@ class SafeLoader(OrderedLoaderMixin, yaml.SafeLoader):
     pass
 
 
+if not hasattr(yaml, 'CLoader') and yamlloader.settings.ALLOW_NON_C_FALLBACK:
+    yaml.CLoader = yaml.Loader
+
+
 class CLoader(OrderedLoaderMixin, yaml.CLoader):
     pass
+
+
+if not hasattr(yaml, 'CSafeLoader') and yamlloader.settings.ALLOW_NON_C_FALLBACK:
+    yaml.CSafeLoader = yaml.SafeLoader
 
 
 class CSafeLoader(OrderedLoaderMixin, yaml.CSafeLoader):

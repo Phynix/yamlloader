@@ -21,7 +21,7 @@ This project was originally mirrored from
 `yamlordereddict <https://github.com/fmenabe/python-yamlordereddictloader>`_
 Many thanks to the original author François Ménabé!
 The library contains several improvements including automated testing and
- the much faster C-versions of the Loaders/Dumpers.
+the much faster C-versions of the Loaders/Dumpers.
 
 
 `API Documentation <https://phynix.github.io/yamlloader/index.html>`_
@@ -51,6 +51,17 @@ Also, there are no fails to be expected.
 Still, if you are concerned that *your* special case may breaks in the future, please
 add your own tests as `test_ext_anyname.py` under `tests/` or let us know about your needs.
 This guarantees that no code will be added that breaks *your* case.
+
+
+C vs non-C version
+------------------
+
+A significant speedup can be reached by replacing the Loader* and Dumper* classes by CLoader*
+and CDumper*. The package hereby relies on the implementations from PyYAML. If they have not
+been compiled, *yamlloader* automatically falls back to the non-C versions.
+
+Therefore using the C-version is safe: if it is not available, the pure Python version is
+automatically used.
 
 
 Loader usage
