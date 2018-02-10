@@ -20,7 +20,7 @@ class OrderedDumperMixin(object):
         sub_doc = self.__doc__
         if sub_doc is None:
             sub_doc = ""
-        self.__doc__ = """Dump `:py:class:~collections.OrderedDict` to YAML preserving the order."""
+        self.__doc__ = """Dump :py:class:`~collections.OrderedDict` to YAML preserving the order."""
         self.__doc__ += sub_doc
         super(OrderedDumperMixin, self).__init__(*args, **kwargs)
         self.add_representer(OrderedDict, type(self).represent_ordereddict)
