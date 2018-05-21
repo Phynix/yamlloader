@@ -12,7 +12,10 @@ __all__ = []
 
 
 def construct_yaml_map(self, node):
-    data = OrderedDict()
+    if yamlloader.settings.PY_GE_37:
+        data = dict()
+    else:
+        data = OrderedDict()
     yield data
     value = self.construct_mapping(node)
     data.update(value)
@@ -25,7 +28,10 @@ def construct_mapping(self, node, deep=False):
         msg = 'Expected a mapping node, but found {}'.format(node.id)
         raise yaml.constructor.ConstructError(None, None, msg, node.start_mark)
 
-    mapping = OrderedDict()
+    if yamlloader.settings.PY_GE_37:
+        mapping = dict()
+    else:
+        mapping = OrderedDict()
     for key_node, value_node in node.value:
         key = self.construct_object(key_node, deep=deep)
         try:

@@ -12,4 +12,4 @@ ALLOW_NON_C_FALLBACK = True
 
 PY_GE_37 = sys.version_info[:2] >= (3, 7)
 # HACK BELOW
-# PY_GE_37 = True
+PY_GE_37 = True

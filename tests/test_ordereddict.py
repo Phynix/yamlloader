@@ -18,7 +18,7 @@ import yamlloader
 
 pyle36 = sys.version_info[:2] <= (3, 6)
 # HACK BELOW
-# pyle36 = False
+pyle36 = False
 # raise ValueError(pyle36)
 
 long_settings = settings(max_examples=10, max_iterations=20, max_shrinks=10,
@@ -266,7 +266,10 @@ class TestLoaderDumper(TestCase):
         dict_loaded = yaml.load(dumbed_dict, Loader=loader)
         self.assertEqual(dict_to_save, dict_loaded)
         self.assertListEqual(list(dict_to_save.keys()), list(dict_loaded.keys()))
-        self.assertEqual(type(dict_to_save), type(dict_loaded))
+        if pyle36:
+            self.assertEqual(type(dict_to_save), type(dict_loaded))
+        else:
+            self.assertEqual(dict, type(dict_loaded))
 
 
 class TestAssumptions(TestCase):
