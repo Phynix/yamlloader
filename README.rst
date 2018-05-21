@@ -107,3 +107,13 @@ Dumper usage
 **Note:** For using the safe dumper (which produce standard YAML tags and does
 not represent arbitrary Python objects), replace ``yamlloader.ordereddict.CDumper`` by
 ``yamlloader.ordereddict.CSafeDumper``.
+
+
+FAQ
+===
+
+The C version does not work
+---------------------------
+Check if yaml.cyaml exists. If not, the cyaml module was not compiled during the installation of
+yaml (pyyaml). Make sure that cython is installed (`pip install Cython`) and the yaml.h file is
+there (apt: libyaml-dev).
