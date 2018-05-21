@@ -1,5 +1,7 @@
 .. image:: https://travis-ci.org/Phynix/yamlloader.svg?branch=master
     :target: https://travis-ci.org/Phynix/yamlloader
+.. image:: https://img.shields.io/pypi/pyversions/yamlloader.svg
+    :target: https://pypi.org/project/yamlloader/
 .. image:: https://landscape.io/github/Phynix/yamlloader/master/landscape.svg?style=flat
     :target: https://landscape.io/github/Phynix/yamlloader/master
     :alt: Code Health
@@ -30,7 +32,7 @@ the much faster C-versions of the Loaders/Dumpers.
 
 Install
 -------
-It is recommended to use the pip or anaconda version
+There is a pip and a conda version available
 
 .. code-block:: bash
 
