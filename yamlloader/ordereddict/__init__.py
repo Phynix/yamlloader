@@ -2,14 +2,23 @@
 """YAML loaders and dumpers for PyYAML allowing to keep keys order."""
 from __future__ import print_function, division, absolute_import
 
-from .loaders import Loader, SafeLoader, CLoader, CSafeLoader
-from .dumpers import Dumper, SafeDumper, CDumper, CSafeDumper
+from .loaders import Loader, SafeLoader
+from .dumpers import Dumper, SafeDumper
 
-__all__ = ['CLoader',
-           'Loader',
-           'CDumper',
+__c_handler_names = []
+
+try:
+    from .loaders import CLoader, CSafeLoader
+    from .dumpers import CDumper, CSafeDumper
+    __c_handler_names += ['CLoader',
+                          'CDumper',
+                          'CSafeLoader',
+                          'CSafeDumper',
+                          ]
+except ImportError:  # PyYAML.cyaml not available -> error
+    pass  # C version not available
+
+__all__ = ['Loader',
            'Dumper',
-           'CSafeLoader',
            'SafeLoader',
-           'CSafeDumper',
-           'SafeDumper']
+           'SafeDumper'] + __c_handler_names

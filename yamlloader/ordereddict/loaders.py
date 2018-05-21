@@ -58,17 +58,17 @@ class SafeLoader(OrderedLoaderMixin, yaml.SafeLoader):
     pass
 
 
-if not hasattr(yaml, 'CLoader') and yamlloader.settings.ALLOW_NON_C_FALLBACK:
-    yaml.CLoader = yaml.Loader
+if not hasattr(yaml, 'CLoader'):
+    if yamlloader.settings.ALLOW_NON_C_FALLBACK:
+        CLoader = Loader
+else:
+    class CLoader(OrderedLoaderMixin, yaml.CLoader):
+        pass
 
 
-class CLoader(OrderedLoaderMixin, yaml.CLoader):
-    pass
-
-
-if not hasattr(yaml, 'CSafeLoader') and yamlloader.settings.ALLOW_NON_C_FALLBACK:
-    yaml.CSafeLoader = yaml.SafeLoader
-
-
-class CSafeLoader(OrderedLoaderMixin, yaml.CSafeLoader):
-    pass
+if not hasattr(yaml, 'CSafeLoader'):
+    if yamlloader.settings.ALLOW_NON_C_FALLBACK:
+        CSafeLoader = SafeLoader
+else:
+    class CSafeLoader(OrderedLoaderMixin, yaml.CSafeLoader):
+        pass
