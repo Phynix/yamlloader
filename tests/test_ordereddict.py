@@ -17,9 +17,6 @@ import yaml
 import yamlloader
 
 pyle36 = sys.version_info[:2] <= (3, 6)
-# HACK BELOW
-pyle36 = False
-# raise ValueError(pyle36)
 
 long_settings = settings(max_examples=10, max_iterations=20, max_shrinks=10,
                          timeout=hypothesis.unlimited)
@@ -220,7 +217,6 @@ class TestLoaderDumper(TestCase):
     @given(recursive_dict_strat(dict_class=OrderedDict))
     def loaddump_unicode_pyle36(self, dict_to_save):
         self._loaddump_unicode(dict_to_save=dict_to_save)
-
 
     def _loaddump_unicode(self, dict_to_save):
 

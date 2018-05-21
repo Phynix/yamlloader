@@ -15,7 +15,8 @@ yamlloader
 
 This module provides loaders and dumpers for PyYAML. Currently, an OrderedDict loader/dumper is
 implemented, allowing to keep items order
-when loading resp. dumping a file from/to an OrderedDict.
+when loading resp. dumping a file from/to an OrderedDict (Python 3.7: also normal dicts are supported
+and are the default items to be loaded to)
 
 This project was originally mirrored from
 `yamlordereddict <https://github.com/fmenabe/python-yamlordereddictloader>`_
@@ -39,7 +40,7 @@ or
 
 .. code-block:: bash
 
-    $ conda install yamlloader -c phynix
+    $ conda install yamlloader -c phynix  # it is also in conda-forge
 
 
 But does [your special case here] also work?
@@ -58,10 +59,13 @@ C vs non-C version
 
 A significant speedup can be reached by replacing the Loader* and Dumper* classes by CLoader*
 and CDumper*. The package hereby relies on the implementations from PyYAML. If they have not
-been compiled, *yamlloader* automatically falls back to the non-C versions.
+been compiled, *yamlloader* **automatically** falls back to the non-C versions.
 
 Therefore using the C-version is safe: if it is not available, the pure Python version is
 automatically used.
+
+Usage examples
+==============
 
 
 Loader usage
