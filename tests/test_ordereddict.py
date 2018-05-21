@@ -16,6 +16,9 @@ import yaml
 
 import yamlloader
 
+pyle36 = not (sys.version_info.major >= 3 and sys.version_info.minor >= 7)
+# raise ValueError(pyle36)
+
 long_settings = settings(max_examples=10, max_iterations=20, max_shrinks=10,
                          timeout=hypothesis.unlimited)
 # long_settings = settings(max_examples=100, max_iterations=200, max_shrinks=100,
@@ -31,6 +34,7 @@ if 'TRAVIS' in os.environ:  # set settings for CI
     long_settings = settings(max_examples=300, max_iterations=1000, max_shrinks=10000,
                              timeout=hypothesis.unlimited,
                              suppress_health_check=(hypothesis.HealthCheck.too_slow,))
+
 
 # def create_tempfile(suffix=None):
 #     """Create a temporary file and remove it on exit "guaranteed".
@@ -98,21 +102,21 @@ def dict_val_strat(ascii_only=False):
                                         st.integers())))
 
 
-def get_extended_dict(ascii_only=False):
+def get_extended_dict(ascii_only=False, dict_class=None):
     def extend_dict(strategy):
         new_dict = st.dictionaries(keys=copy.deepcopy(dict_keys_strat(ascii_only=ascii_only)),
-                                   values=strategy, dict_class=OrderedDict)
+                                   values=strategy, dict_class=dict_class)
         return new_dict
 
     return extend_dict
 
 
-def recursive_dict_strat(ascii_only=False):
+def recursive_dict_strat(ascii_only=False, dict_class=None):
     return st.recursive(
             base=st.dictionaries(keys=copy.deepcopy(dict_keys_strat(ascii_only=ascii_only)),
                                  values=copy.deepcopy(dict_val_strat(ascii_only=ascii_only)),
-                                 dict_class=OrderedDict),
-            extend=get_extended_dict(ascii_only=ascii_only), max_leaves=5)
+                                 dict_class=dict_class),
+            extend=get_extended_dict(ascii_only=ascii_only, dict_class=dict_class), max_leaves=5)
 
 
 loaders = [yamlloader.ordereddict.Loader,
@@ -138,7 +142,6 @@ yaml_dumpers = {yamlloader.ordereddict.Dumper: yaml.Dumper,
 
 safe_loaders = [yamlloader.ordereddict.SafeLoader, yamlloader.ordereddict.CSafeLoader]
 safe_dumpers = [yamlloader.ordereddict.SafeDumper, yamlloader.ordereddict.CSafeDumper]
-
 
 loaderdumper = [(l, d) for l in loaders for d in dumpers]
 
@@ -174,9 +177,22 @@ class TestLoaderDumper(TestCase):
     #     self.dumper = yamlloader.ordereddict.CDumper
     #     self.loaddump()
 
+    def loaddump_ascii_only(self):
+        if not pyle36:
+            self.loaddumb_ascii_only_pyg36()
+        self.loaddump_ascii_only_pyle36()
+
     @long_settings
-    @given(recursive_dict_strat(ascii_only=True))
-    def loaddump_ascii_only(self, dict_to_save):
+    @given(recursive_dict_strat(ascii_only=True, dict_class=dict))
+    def loaddumb_ascii_only_pyg36(self, dict_to_save):
+        self._load_dump_ascii_only(dict_to_save)
+
+    @long_settings
+    @given(recursive_dict_strat(ascii_only=True, dict_class=OrderedDict))
+    def loaddump_ascii_only_pyle36(self, dict_to_save):
+        self._load_dump_ascii_only(dict_to_save)
+
+    def _load_dump_ascii_only(self, dict_to_save):
         if self.loader in safe_loaders and self.dumper not in safe_dumpers:
             return
         try:
@@ -188,9 +204,23 @@ class TestLoaderDumper(TestCase):
             # hypothesis.assume(False)
         self.loaddump(dict_to_save=dict_to_save)
 
+    def loaddump_unicode(self):
+        if not pyle36:
+            self.loaddump_unicode_pyge37()
+        self.loaddump_unicode_pyle36()
+
     @long_settings
-    @given(recursive_dict_strat())
-    def loaddump_unicode(self, dict_to_save):
+    @given(recursive_dict_strat(dict_class=dict))
+    def loaddump_unicode_pyge37(self, dict_to_save):
+        self._loaddump_unicode(dict_to_save=dict_to_save)
+
+    @long_settings
+    @given(recursive_dict_strat(dict_class=OrderedDict))
+    def loaddump_unicode_pyle36(self, dict_to_save):
+        self._loaddump_unicode(dict_to_save=dict_to_save)
+
+
+    def _loaddump_unicode(self, dict_to_save):
 
         def convert_nested_dict(dictionary, convert_from=None, convert_to=dict):
             new_dict = {}
@@ -203,8 +233,9 @@ class TestLoaderDumper(TestCase):
                 new_dict[key] = val
             return new_dict
 
-        dict_conv_to_save = convert_nested_dict(dict_to_save, convert_from=OrderedDict,
+        dict_conv_to_save = convert_nested_dict(dict_to_save, convert_from=(OrderedDict, dict),
                                                 convert_to=dict)
+        # Test if dumping with yaml normally is possible
         try:
             dumbed_dict = yaml.dump(dict_conv_to_save, Dumper=yaml_dumpers[self.dumper])
             dict_loaded = yaml.load(dumbed_dict, Loader=yaml_loaders[self.loader])
