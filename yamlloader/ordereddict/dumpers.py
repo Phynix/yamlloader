@@ -35,7 +35,7 @@ class OrderedDumperMixin(object):
         self.__doc__ += sub_doc
         super(OrderedDumperMixin, self).__init__(*args, **kwargs)
         self.add_representer(OrderedDict, type(self).represent_ordereddict)
-        if yamlloader.settings.PY_GE_37:
+        if not yamlloader.settings.PY_LE_36:
             self.add_representer(dict, type(self).represent_ordereddict)
 
     represent_ordereddict = represent_ordereddict

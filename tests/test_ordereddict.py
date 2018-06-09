@@ -16,7 +16,7 @@ import yaml
 
 import yamlloader
 
-pyle36 = sys.version_info[:2] <= (3, 6)
+PY_LE_36 = sys.version_info[:2] <= (3, 6)
 
 long_settings = settings(max_examples=10, max_iterations=20, max_shrinks=10,
                          timeout=hypothesis.unlimited)
@@ -177,7 +177,7 @@ class TestLoaderDumper(TestCase):
     #     self.loaddump()
 
     def loaddump_ascii_only(self):
-        if not pyle36:
+        if not PY_LE_36:
             self.loaddumb_ascii_only_pyg36()
         self.loaddump_ascii_only_pyle36()
 
@@ -204,7 +204,7 @@ class TestLoaderDumper(TestCase):
         self.loaddump(dict_to_save=dict_to_save)
 
     def loaddump_unicode(self):
-        if not pyle36:
+        if not PY_LE_36:
             self.loaddump_unicode_pyge37()
         self.loaddump_unicode_pyle36()
 
@@ -262,7 +262,7 @@ class TestLoaderDumper(TestCase):
         dict_loaded = yaml.load(dumbed_dict, Loader=loader)
         self.assertEqual(dict_to_save, dict_loaded)
         self.assertListEqual(list(dict_to_save.keys()), list(dict_loaded.keys()))
-        if pyle36:
+        if PY_LE_36:
             self.assertEqual(type(dict_to_save), type(dict_loaded))
         else:
             self.assertEqual(dict, type(dict_loaded))
