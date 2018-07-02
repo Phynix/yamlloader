@@ -38,7 +38,7 @@ class OrderedDumperMixin(object):
         if not yamlloader.settings.PY_LE_36:
             self.add_representer(dict, type(self).represent_ordereddict)
 
-    represent_ordereddict = represent_ordereddict
+    represent_ordereddict = staticmethod(represent_ordereddict)
 
 
 doc_extension_Cversion = """
