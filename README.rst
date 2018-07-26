@@ -1,5 +1,7 @@
 .. image:: https://travis-ci.org/Phynix/yamlloader.svg?branch=master
     :target: https://travis-ci.org/Phynix/yamlloader
+.. image:: https://img.shields.io/pypi/pyversions/yamlloader.svg
+    :target: https://pypi.org/project/yamlloader/
 .. image:: https://landscape.io/github/Phynix/yamlloader/master/landscape.svg?style=flat
     :target: https://landscape.io/github/Phynix/yamlloader/master
     :alt: Code Health
@@ -15,7 +17,7 @@ yamlloader
 
 This module provides loaders and dumpers for PyYAML. Currently, an OrderedDict loader/dumper is
 implemented, allowing to keep items order
-when loading resp. dumping a file from/to an OrderedDict.
+when loading resp. dumping a file from/to an OrderedDict (Python 3.7: Also regular dicts are supported and are the default items to be loaded to. As of Python 3.7 preservation of insertion order is a language feature of regular dicts.)
 
 This project was originally mirrored from
 `yamlordereddict <https://github.com/fmenabe/python-yamlordereddictloader>`_
@@ -29,7 +31,7 @@ the much faster C-versions of the Loaders/Dumpers.
 
 Install
 -------
-It is recommended to use the pip or anaconda version
+There is a pip and a conda version available
 
 .. code-block:: bash
 
@@ -39,7 +41,7 @@ or
 
 .. code-block:: bash
 
-    $ conda install yamlloader -c phynix
+    $ conda install yamlloader -c phynix  # it is also in conda-forge
 
 
 But does [your special case here] also work?
@@ -58,10 +60,13 @@ C vs non-C version
 
 A significant speedup can be reached by replacing the Loader* and Dumper* classes by CLoader*
 and CDumper*. The package hereby relies on the implementations from PyYAML. If they have not
-been compiled, *yamlloader* automatically falls back to the non-C versions.
+been compiled, *yamlloader* **automatically** falls back to the non-C versions.
 
 Therefore using the C-version is safe: if it is not available, the pure Python version is
 automatically used.
+
+Usage examples
+==============
 
 
 Loader usage
@@ -101,3 +106,13 @@ Dumper usage
 **Note:** For using the safe dumper (which produce standard YAML tags and does
 not represent arbitrary Python objects), replace ``yamlloader.ordereddict.CDumper`` by
 ``yamlloader.ordereddict.CSafeDumper``.
+
+
+FAQ
+===
+
+The C version does not work
+---------------------------
+Check if yaml.cyaml exists. If not, the cyaml module was not compiled during the installation of
+yaml (pyyaml). Make sure that cython is installed (`pip install Cython`) and the yaml.h file is
+there (apt: libyaml-dev).
