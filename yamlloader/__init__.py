@@ -16,7 +16,7 @@ if sys.version_info[:2] < (2, 7):
                        "Please upgrade your distribution and/or packages.")
 
 __version__ = "0.5.3"
-__author__ = 'Jonas Eschle "Mayou36", Johannes Lade'
+__author__ = 'Jonas Eschle "Mayou36", Johannes Lade "SebastianJL"'
 __email__ = 'jonas.eschle@phynix.science, johannes.lade@phynix.science'
 
 __all__ = ['ordereddict']
