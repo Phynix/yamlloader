@@ -17,8 +17,7 @@ yamlloader
 
 This module provides loaders and dumpers for PyYAML. Currently, an OrderedDict loader/dumper is
 implemented, allowing to keep items order
-when loading resp. dumping a file from/to an OrderedDict (Python 3.7: also normal dicts are supported
-and are the default items to be loaded to)
+when loading resp. dumping a file from/to an OrderedDict (Python 3.7: Also regular dicts are supported and are the default items to be loaded to. As of Python 3.7 preservation of insertion order is a language feature of regular dicts.)
 
 This project was originally mirrored from
 `yamlordereddict <https://github.com/fmenabe/python-yamlordereddictloader>`_
