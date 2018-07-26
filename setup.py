@@ -18,9 +18,9 @@ def long_description():
 
 
 setup(name='yamlloader',
-      version='0.5.2',
-      author='Jonas Eschle "Mayou36"',
-      author_email='jonas.eschle@phynix.science',
+      version='0.5.3',
+      author='Jonas Eschle "Mayou36", Johannes Lade',
+      author_email='jonas.eschle@phynix.science, johannes.lade@phynix.science',
       maintainer='Jonas Eschle "Mayou36"',
       maintainer_email='jonas.eschle@phynix.science',
       url='https://github.com/Phynix/yamlloader',

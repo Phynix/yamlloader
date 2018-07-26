@@ -15,8 +15,8 @@ if sys.version_info[:2] < (2, 7):
     raise RuntimeError("You are using Python < 2.7. This is not supported. "
                        "Please upgrade your distribution and/or packages.")
 
-__version__ = "0.5.2"
-__author__ = 'Jonas Eschle "Mayou36"'
-__email__ = "jonas.eschle@phynix.science"
+__version__ = "0.5.3"
+__author__ = 'Jonas Eschle "Mayou36", Johannes Lade'
+__email__ = 'jonas.eschle@phynix.science, johannes.lade@phynix.science'
 
 __all__ = ['ordereddict']
