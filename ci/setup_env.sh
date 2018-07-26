@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
-conda create -q --name=yamlloader-env python=$PHYNIX_PYTHON_VERSION > tmp.txt && echo "alive"
-source activate yamlloader-env
+conda create -q --name=yamlloader_env python=$PHYNIX_PYTHON_VERSION > tmp.txt && echo "alive"
+source activate yamlloader_env
+if [[ "$PHYNIX_PYTHON_VERSION" == "3.7" ]]; then
+        pip install cython;
+        pip install PyYAML==3.13rc1;
+fi
+
 
 
