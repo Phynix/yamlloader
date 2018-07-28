@@ -18,7 +18,7 @@ def long_description():
 
 
 setup(name='yamlloader',
-      version='0.5.4',
+      version='0.5.5',
       author='Jonas Eschle "Mayou36", Johannes Lade "SebastianJL"',
       author_email='jonas.eschle@phynix.science, johannes.lade@phynix.science',
       maintainer='Jonas Eschle "Mayou36"',
@@ -32,7 +32,7 @@ setup(name='yamlloader',
       classifiers=['Development Status :: 5 - Production/Stable',
                    'Intended Audience :: Developers',
                    'Intended Audience :: System Administrators',
-                   'Intended Audience:: Science / Research',
+                   'Intended Audience:: Science/Research',
                    'Natural Language :: English',
                    'License :: OSI Approved :: MIT License', 'Programming Language :: Python',
                    'Programming Language :: Python :: 2.7', 'Programming Language :: Python :: 3',
