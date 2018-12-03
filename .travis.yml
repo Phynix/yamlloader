@@ -47,6 +47,7 @@ deploy:
     on:
       branch: master
       condition: $TRAVIS_PYTHON_VERSION = "3.6" && $TRAVIS_OS_NAME = "linux"
+      tags: true
 
   - provider: pages
     skip_cleanup: true
