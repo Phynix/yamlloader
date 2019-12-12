@@ -18,7 +18,7 @@ import yamlloader
 
 PY_LE_36 = sys.version_info[:2] <= (3, 6)
 
-long_settings = settings(max_examples=10, max_iterations=20, max_shrinks=10,
+long_settings = settings(max_examples=10,
                          timeout=hypothesis.unlimited)
 # long_settings = settings(max_examples=100, max_iterations=200, max_shrinks=100,
 #                          timeout=hypothesis.unlimited)
@@ -30,7 +30,7 @@ ASCII_CODEPOINT = 126
 
 
 if 'TRAVIS' in os.environ:  # set settings for CI
-    long_settings = settings(max_examples=300, max_iterations=1000, max_shrinks=10000,
+    long_settings = settings(max_examples=300,
                              timeout=hypothesis.unlimited,
                              suppress_health_check=(hypothesis.HealthCheck.too_slow,))
 
@@ -78,7 +78,7 @@ def dict_keys_strat(ascii_only=False):
     return st.text(alphabet=st.characters(max_codepoint=max_codepoint,
                                           blacklist_characters=blacklist_characters),
                    # avoid u'str'!
-                   average_size=6, min_size=1,
+                   min_size=1,
                    max_size=25)
 
 
@@ -92,8 +92,8 @@ def dict_val_strat(ascii_only=False):
     text = st.text(alphabet=st.characters(max_codepoint=max_codepoint,
                                           blacklist_characters=blacklist_characters),
                    # avoid u'str'!
-                   average_size=10, min_size=1,
-                   max_size=100000)
+                   min_size=1,
+                   max_size=10000)
     return st.one_of(text, st.integers(),
                      st.floats(allow_nan=False, allow_infinity=False),
                      st.lists(st.one_of(st.text(max_size=10),
