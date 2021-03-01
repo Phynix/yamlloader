@@ -19,7 +19,7 @@ def long_description():
 
 dev_requiremnets = ['pytest', 'hypothesis']
 setup(name='yamlloader',
-      version='0.5.5',
+      version='1.0.0',
       author='Jonas Eschle "Mayou36", Johannes Lade "SebastianJL"',
       author_email='jonas.eschle@phynix.science, johannes.lade@phynix.science',
       maintainer='Jonas Eschle "Mayou36"',
