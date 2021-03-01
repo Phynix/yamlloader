@@ -4,11 +4,10 @@ os:
 #  - osx
 language: python
 python:
- - '2.7'
- - '3.5'
  - '3.6'
  - "3.7"
  - '3.8'
+ - '3.9'
 matrix:
  include:
   - os: osx
@@ -45,7 +44,7 @@ deploy:
     distributions: sdist bdist_wheel
     on:
       branch: master
-      condition: $TRAVIS_PYTHON_VERSION = "3.6" && $TRAVIS_OS_NAME = "linux"
+      condition: $TRAVIS_PYTHON_VERSION = "3.9" && $TRAVIS_OS_NAME = "linux"
       tags: true
 
   - provider: pages
@@ -55,4 +54,4 @@ deploy:
     local_dir: docs/api/_build/html
     on:
       branch: master
-      condition: $TRAVIS_PYTHON_VERSION = "3.6" && $TRAVIS_OS_NAME = "linux"
+      condition: $TRAVIS_PYTHON_VERSION = "3.9" && $TRAVIS_OS_NAME = "linux"
