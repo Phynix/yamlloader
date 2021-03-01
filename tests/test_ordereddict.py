@@ -1,25 +1,18 @@
 from __future__ import print_function, division, absolute_import
 
-import contextlib
-import tempfile
 import copy
 import os
-import sys
-import atexit
 from collections import OrderedDict
 from unittest import TestCase
 
 import hypothesis
-from hypothesis import given, settings
 import hypothesis.strategies as st
 import yaml
+from hypothesis import given, settings
 
 import yamlloader
 
-PY_LE_36 = sys.version_info[:2] <= (3, 6)
-
-long_settings = settings(max_examples=10, max_iterations=20, max_shrinks=10,
-                         timeout=hypothesis.unlimited)
+long_settings = settings(max_examples=10)
 # long_settings = settings(max_examples=100, max_iterations=200, max_shrinks=100,
 #                          timeout=hypothesis.unlimited)
 
@@ -30,8 +23,7 @@ ASCII_CODEPOINT = 126
 
 
 if 'TRAVIS' in os.environ:  # set settings for CI
-    long_settings = settings(max_examples=300, max_iterations=1000, max_shrinks=10000,
-                             timeout=hypothesis.unlimited,
+    long_settings = settings(max_examples=300,
                              suppress_health_check=(hypothesis.HealthCheck.too_slow,))
 
 
@@ -78,7 +70,7 @@ def dict_keys_strat(ascii_only=False):
     return st.text(alphabet=st.characters(max_codepoint=max_codepoint,
                                           blacklist_characters=blacklist_characters),
                    # avoid u'str'!
-                   average_size=6, min_size=1,
+                   min_size=1,
                    max_size=25)
 
 
@@ -92,8 +84,8 @@ def dict_val_strat(ascii_only=False):
     text = st.text(alphabet=st.characters(max_codepoint=max_codepoint,
                                           blacklist_characters=blacklist_characters),
                    # avoid u'str'!
-                   average_size=10, min_size=1,
-                   max_size=100000)
+                   min_size=100,
+                   max_size=10000)
     return st.one_of(text, st.integers(),
                      st.floats(allow_nan=False, allow_infinity=False),
                      st.lists(st.one_of(st.text(max_size=10),
@@ -112,10 +104,10 @@ def get_extended_dict(ascii_only=False, dict_class=None):
 
 def recursive_dict_strat(ascii_only=False, dict_class=None):
     return st.recursive(
-            base=st.dictionaries(keys=copy.deepcopy(dict_keys_strat(ascii_only=ascii_only)),
-                                 values=copy.deepcopy(dict_val_strat(ascii_only=ascii_only)),
-                                 dict_class=dict_class),
-            extend=get_extended_dict(ascii_only=ascii_only, dict_class=dict_class), max_leaves=5)
+        base=st.dictionaries(keys=copy.deepcopy(dict_keys_strat(ascii_only=ascii_only)),
+                             values=copy.deepcopy(dict_val_strat(ascii_only=ascii_only)),
+                             dict_class=dict_class),
+        extend=get_extended_dict(ascii_only=ascii_only, dict_class=dict_class), max_leaves=5)
 
 
 loaders = [yamlloader.ordereddict.Loader,
@@ -163,28 +155,13 @@ class TestLoaderDumper(TestCase):
 
     def test_SafeLoadCombinations(self):
         for loader, dumper in loaderdumper:
-
             self.set_LoadersDumpers(loader=loader, dumper=dumper)
-            if (loader in safe_loaders and dumper not in safe_dumpers
-                    and sys.version_info[:2] == (2, 7)):  # SafeLoader cannot load unicode in Py2:
-                self.loaddump_ascii_only()
-            else:
-                self.loaddump_unicode()
 
-    # def test_normalCLoaderCDumper(self):
-    #     self.loader = yamlloader.ordereddict.CLoader
-    #     self.dumper = yamlloader.ordereddict.CDumper
-    #     self.loaddump()
+            self.loaddump_unicode()
 
     def loaddump_ascii_only(self):
-        if not PY_LE_36:
-            self.loaddumb_ascii_only_pyg36()
-        self.loaddump_ascii_only_pyle36()
 
-    @long_settings
-    @given(recursive_dict_strat(ascii_only=True, dict_class=dict))
-    def loaddumb_ascii_only_pyg36(self, dict_to_save):
-        self._load_dump_ascii_only(dict_to_save)
+        self.loaddump_ascii_only_pyle36()
 
     @long_settings
     @given(recursive_dict_strat(ascii_only=True, dict_class=OrderedDict))
@@ -204,14 +181,7 @@ class TestLoaderDumper(TestCase):
         self.loaddump(dict_to_save=dict_to_save)
 
     def loaddump_unicode(self):
-        if not PY_LE_36:
-            self.loaddump_unicode_pyge37()
         self.loaddump_unicode_pyle36()
-
-    @long_settings
-    @given(recursive_dict_strat(dict_class=dict))
-    def loaddump_unicode_pyge37(self, dict_to_save):
-        self._loaddump_unicode(dict_to_save=dict_to_save)
 
     @long_settings
     @given(recursive_dict_strat(dict_class=OrderedDict))
@@ -248,12 +218,6 @@ class TestLoaderDumper(TestCase):
         self.loaddump(dict_to_save=dict_to_save)
 
     def loaddump(self, dict_to_save, loader=None, dumper=None):
-        # with temp_file() as tfile_name:
-        #     with open(tfile_name, mode='w') as tfile_write:
-        #         yaml.dump(dict_to_save, tfile_write, dumper)
-        #
-        #     with open(tfile_name, mode='r') as tfile_read:
-        #         dict_loaded = yaml.load(tfile_read, loader)
         if loader is None:
             loader = self.loader
         if dumper is None:
@@ -262,25 +226,22 @@ class TestLoaderDumper(TestCase):
         dict_loaded = yaml.load(dumbed_dict, Loader=loader)
         self.assertEqual(dict_to_save, dict_loaded)
         self.assertListEqual(list(dict_to_save.keys()), list(dict_loaded.keys()))
-        if PY_LE_36:
-            self.assertEqual(type(dict_to_save), type(dict_loaded))
-        else:
-            self.assertEqual(dict, type(dict_loaded))
+        self.assertEqual(type(dict_to_save), type(dict_loaded))
 
 
 class TestAssumptions(TestCase):
 
     def setUp(self):
         self.odict1 = OrderedDict(
-                [('a', [11, 12, 13]), ('b', [21, 22, 23]), ('c', [31, 32, 33]), ('e', [21, 22, 23]),
-                 ('d', [11, 12, 13]), ('f', OrderedDict(
-                        [('a', [11, 12, 13]), ('b', [21, 22, 23]), ('c', [31, 32, 33]),
-                         ('e', [21, 22, 23]), ('d', [11, 12, 13])]))])
+            [('a', [11, 12, 13]), ('b', [21, 22, 23]), ('c', [31, 32, 33]), ('e', [21, 22, 23]),
+             ('d', [11, 12, 13]), ('f', OrderedDict(
+                [('a', [11, 12, 13]), ('b', [21, 22, 23]), ('c', [31, 32, 33]),
+                 ('e', [21, 22, 23]), ('d', [11, 12, 13])]))])
         self.odict2 = OrderedDict(
-                [('a', [11, 12, 13]), ('b', [21, 22, 23]), ('c', [31, 32, 33]), ('e', [21, 22, 23]),
-                 ('d', [11, 12, 13]), ('f', OrderedDict(
-                        [('a', [11, 12, 13]), ('b', [21, 22, 23]), ('c', [31, 32, 33]),
-                         ('d', [11, 12, 13]), ('e', [21, 22, 23])]))])
+            [('a', [11, 12, 13]), ('b', [21, 22, 23]), ('c', [31, 32, 33]), ('e', [21, 22, 23]),
+             ('d', [11, 12, 13]), ('f', OrderedDict(
+                [('a', [11, 12, 13]), ('b', [21, 22, 23]), ('c', [31, 32, 33]),
+                 ('d', [11, 12, 13]), ('e', [21, 22, 23])]))])
 
     def test_equality_assumptions(self):
         self.assertNotEqual(self.odict1, self.odict2)

@@ -3,4 +3,4 @@
 pip install coverage > tmp.txt && echo "alive";
 #conda install -y coverage > tmp.txt && echo "alive";
 pip install coveralls > tmp.txt && echo "alive";
-pip install hypothesis
+pip install hypothesis pytest

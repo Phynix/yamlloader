@@ -10,4 +10,3 @@ import sys
 
 ALLOW_NON_C_FALLBACK = True
 
-PY_LE_36 = sys.version_info[:2] <= (3, 6)
