@@ -5,6 +5,3 @@ if [[ "$PHYNIX_PYTHON_VERSION" == "3.7" ]]; then
         pip install cython;
         pip install pyyaml;
 fi
-
-
-

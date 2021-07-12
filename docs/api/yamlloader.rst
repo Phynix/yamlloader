@@ -12,4 +12,3 @@ Subpackages
 .. toctree::
 
     yamlloader.ordereddict
-

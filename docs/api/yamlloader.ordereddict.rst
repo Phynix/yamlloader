@@ -13,4 +13,3 @@ Submodules
 
    yamlloader.ordereddict.dumpers
    yamlloader.ordereddict.loaders
-

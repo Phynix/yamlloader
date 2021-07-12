@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 #
 # yamlloader documentation build configuration file, created by
 # sphinx-quickstart on Wed Dec 13 13:46:00 2017.
@@ -35,7 +34,7 @@ import yamlloader
 
 here = os.path.abspath(os.path.dirname(__file__))
 
-autoclass_content = 'both'  # document modules and packages
+autoclass_content = "both"  # document modules and packages
 
 # Sphinx theme
 import sphinx_rtd_theme
@@ -47,17 +46,19 @@ html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.autodoc',
-              'sphinx.ext.doctest',
-              'sphinx.ext.intersphinx',
-              'sphinx.ext.todo',
-              'sphinx.ext.coverage',
-              'sphinx.ext.mathjax',
-              'sphinx.ext.ifconfig',
-              'sphinx.ext.viewcode',
-              'sphinx.ext.githubpages']
+extensions = [
+    "sphinx.ext.autodoc",
+    "sphinx.ext.doctest",
+    "sphinx.ext.intersphinx",
+    "sphinx.ext.todo",
+    "sphinx.ext.coverage",
+    "sphinx.ext.mathjax",
+    "sphinx.ext.ifconfig",
+    "sphinx.ext.viewcode",
+    "sphinx.ext.githubpages",
+]
 
-html_logo = os.path.join(here, 'static/img/phynix_logo_medium.png')
+html_logo = os.path.join(here, "static/img/phynix_logo_medium.png")
 
 # Napoleon settings (convert numpy/google docstrings to proper ReST
 napoleon_google_docstring = False
@@ -73,20 +74,20 @@ napoleon_use_param = True
 napoleon_use_rtype = True
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+templates_path = ["_templates"]
 
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
 #
 # source_suffix = ['.rst', '.md']
-source_suffix = '.rst'
+source_suffix = ".rst"
 
 # The master toctree document.
-master_doc = 'index'
+master_doc = "index"
 
 # General information about the project.
-project = 'yamlloader'
-copyright = '2017, Jonas Eschle'
+project = "yamlloader"
+copyright = "2017, Jonas Eschle"
 author = yamlloader.__author__
 
 # The version info for the project you're documenting, acts as replacement for
@@ -103,15 +104,15 @@ release = version
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = 'en'
+language = "en"
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This patterns also effect to html_static_path and html_extra_path
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = 'sphinx'
+pygments_style = "sphinx"
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True
@@ -131,7 +132,7 @@ todo_include_todos = True
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+html_static_path = ["_static"]
 
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.
@@ -139,19 +140,19 @@ html_static_path = ['_static']
 # This is required for the alabaster theme
 # refs: http://alabaster.readthedocs.io/en/latest/installation.html#sidebars
 html_sidebars = {
-    '**': [
-        'about.html',
-        'navigation.html',
-        'relations.html',  # needs 'show_related': True theme option to display
-        'searchbox.html',
-        'donate.html',
-        ]
-    }
+    "**": [
+        "about.html",
+        "navigation.html",
+        "relations.html",  # needs 'show_related': True theme option to display
+        "searchbox.html",
+        "donate.html",
+    ]
+}
 
 # -- Options for HTMLHelp output ------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'yamlloaderdoc'
+htmlhelp_basename = "yamlloaderdoc"
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -159,36 +160,35 @@ latex_elements = {
     # The paper size ('letterpaper' or 'a4paper').
     #
     # 'papersize': 'letterpaper',
-
     # The font size ('10pt', '11pt' or '12pt').
     #
     # 'pointsize': '10pt',
-
     # Additional stuff for the LaTeX preamble.
     #
     # 'preamble': '',
-
     # Latex figure (float) alignment
     #
     # 'figure_align': 'htbp',
-    }
+}
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'yamlloader.tex', 'yamlloader Documentation',
-     'Jonas Eschle', 'manual'),
-    ]
+    (
+        master_doc,
+        "yamlloader.tex",
+        "yamlloader Documentation",
+        "Jonas Eschle",
+        "manual",
+    ),
+]
 
 # -- Options for manual page output ---------------------------------------
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [
-    (master_doc, 'yamlloader', 'yamlloader Documentation',
-     [author], 1)
-    ]
+man_pages = [(master_doc, "yamlloader", "yamlloader Documentation", [author], 1)]
 
 # -- Options for Texinfo output -------------------------------------------
 
@@ -196,10 +196,16 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'yamlloader', 'yamlloader Documentation',
-     author, 'yamlloader', 'One line description of project.',
-     'Miscellaneous'),
-    ]
+    (
+        master_doc,
+        "yamlloader",
+        "yamlloader Documentation",
+        author,
+        "yamlloader",
+        "One line description of project.",
+        "Miscellaneous",
+    ),
+]
 
 # -- Options for Epub output ----------------------------------------------
 
@@ -219,7 +225,7 @@ epub_copyright = copyright
 # epub_uid = ''
 
 # A list of files that should not be packed into the epub file.
-epub_exclude_files = ['search.html']
+epub_exclude_files = ["search.html"]
 
 # Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {'https://docs.python.org/': None}
+intersphinx_mapping = {"https://docs.python.org/": None}

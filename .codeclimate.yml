@@ -19,4 +19,3 @@ exclude_paths:
   - docs/
   - build/
   - dist/
-
