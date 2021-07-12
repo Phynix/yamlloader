@@ -15,7 +15,7 @@ if sys.version_info[:2] < (2, 7):
     raise RuntimeError("You are using Python < 2.7. This is not supported. "
                        "Please upgrade your distribution and/or packages.")
 
-__version__ = "0.5.5"
+__version__ = "1.0.0"
 __author__ = 'Jonas Eschle "Mayou36", Johannes Lade "SebastianJL"'
 __email__ = 'jonas.eschle@phynix.science, johannes.lade@phynix.science'
 
