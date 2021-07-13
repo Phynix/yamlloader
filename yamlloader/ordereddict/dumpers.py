@@ -5,7 +5,7 @@ import yaml
 
 from collections import OrderedDict
 
-import yamlloader.settings
+from .. import settings
 
 __all__ = []
 
@@ -55,7 +55,7 @@ class SafeDumper(OrderedDumperMixin, yaml.SafeDumper):
 
 
 if not hasattr(yaml, "CDumper"):
-    if yamlloader.settings.ALLOW_NON_C_FALLBACK:
+    if settings.ALLOW_NON_C_FALLBACK:
         CDumper = Dumper
 else:
 
@@ -64,7 +64,7 @@ else:
 
 
 if not hasattr(yaml, "CSafeDumper"):
-    if yamlloader.settings.ALLOW_NON_C_FALLBACK:
+    if settings.ALLOW_NON_C_FALLBACK:
         CSafeDumper = SafeDumper
 else:
 
