@@ -1,5 +1,6 @@
+
 .. image:: https://github.com/Phynix/yamlloader/actions/workflows/ci.yml/badge.svg
-   :alt: CI
+    :target: https://github.com/Phynix/yamlloader/actions
 .. image:: https://img.shields.io/pypi/pyversions/yamlloader.svg
     :target: https://pypi.org/project/yamlloader/
 .. image:: https://badge.fury.io/py/yamlloader.svg
