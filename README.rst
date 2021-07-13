@@ -38,7 +38,7 @@ or
 
 .. code-block:: bash
 
-    $ conda install yamlloader -c phynix  # it is also in conda-forge
+    $ conda install yamlloader -c conda-forge
 
 
 But does [your special case here] also work?
@@ -110,6 +110,7 @@ FAQ
 
 C version not working
 ---------------------------
-Check if yaml.cyaml exists. If not, the cyaml module was not compiled during the installation of
+If the C version is not working (it falls back by default to a non-C version),
+check if yaml.cyaml exists. If not, the cyaml module was not compiled during the installation of
 yaml (pyyaml). Make sure that cython is installed (`pip install Cython`) and the yaml.h file is
 there (apt: libyaml-dev).
