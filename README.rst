@@ -14,7 +14,7 @@ yamlloader
 
 This module provides loaders and dumpers for PyYAML. Currently, an OrderedDict loader/dumper is
 implemented, allowing to keep items order
-when loading resp. dumping a file from/to an OrderedDict (Python 3.7: Also regular dicts are supported and are the default items to be loaded to. As of Python 3.7 preservation of insertion order is a language feature of regular dicts.)
+when loading resp. dumping a file from/to an OrderedDict (Python 3.7+: Also regular dicts are supported and are the default items to be loaded to. As of Python 3.7 preservation of insertion order is a language feature of regular dicts.)
 
 This project was originally mirrored from
 `yamlordereddict <https://github.com/fmenabe/python-yamlordereddictloader>`_
@@ -23,7 +23,7 @@ The library contains several improvements including automated testing and
 the much faster C-versions of the Loaders/Dumpers.
 
 
-`API Documentation <https://phynix.github.io/yamlloader/index.html>`_
+`API Documentation <https://yamlloader.readthedocs.io/>`_
 
 
 Install
@@ -108,7 +108,7 @@ not represent arbitrary Python objects), replace ``yamlloader.ordereddict.CDumpe
 FAQ
 ===
 
-The C version does not work
+C version not working
 ---------------------------
 Check if yaml.cyaml exists. If not, the cyaml module was not compiled during the installation of
 yaml (pyyaml). Make sure that cython is installed (`pip install Cython`) and the yaml.h file is

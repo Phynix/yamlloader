@@ -1,62 +1,20 @@
 import copy
-import os
 from collections import OrderedDict
 from unittest import TestCase
 
 import hypothesis
 import hypothesis.strategies as st
 import yaml
-from hypothesis import given, settings
+from hypothesis import given, settings, HealthCheck
 
 import yamlloader
 
-long_settings = settings(max_examples=10)
-# long_settings = settings(max_examples=100, max_iterations=200, max_shrinks=100,
-#                          timeout=hypothesis.unlimited)
-
 ASCII_CODEPOINT = 126
 
-# long_settings = settings(max_examples=1000, max_iterations=2000, max_shrinks=1000,
-#                          timeout=hypothesis.unlimited)
-
-
-if "TRAVIS" in os.environ:  # set settings for CI
-    long_settings = settings(
-        max_examples=300, suppress_health_check=(hypothesis.HealthCheck.too_slow,)
-    )
-
-
-# def create_tempfile(suffix=None):
-#     """Create a temporary file and remove it on exit "guaranteed".
-#
-#     Returns:
-#         tuple(os handle, str): Returns same objects as :py:func:`tempfile.mkstemp`.
-#     """
-#
-#     try:
-#         os_handle, filename = tempfile.mkstemp(suffix=suffix)
-#     except Exception:  # aiming at interruptions
-#         print("Exception occurred while creating a temp-file")
-#         raise
-#     finally:
-#         atexit.register(cleanup_file, filename)
-#
-#     return os_handle, filename
-
-#
-# def cleanup_file(filename):
-#     """Remove a file if exists."""
-#     try:
-#         os.remove(filename)
-#     except FileNotFoundError as error:
-#         pass  # file was not created at all
-
-# @contextlib.contextmanager
-# def temp_file():
-#     """Create temporary files, cleanup after exit"""
-#     _, file_name = create_tempfile()
-#     yield file_name
-#     os.remove(file_name)
+long_settings = settings(
+    max_examples=20,
+    suppress_health_check=(HealthCheck.too_slow, HealthCheck.data_too_large),
+)
 
 
 def dict_keys_strat(ascii_only=False):
