@@ -1,5 +1,5 @@
 import os
-import io
+
 from setuptools import setup
 
 here = os.path.abspath(os.path.dirname(__file__))
@@ -17,7 +17,7 @@ def long_description():
 dev_requiremnets = ["pytest", "hypothesis"]
 setup(
     name="yamlloader",
-    version="1.0.1",
+    version="1.1.0",
     author='Jonas Eschle "Mayou36", Johannes Lade "SebastianJL"',
     author_email="jonas.eschle@phynix.science, johannes.lade@phynix.science",
     maintainer='Jonas Eschle "Mayou36"',
@@ -36,9 +36,6 @@ setup(
         "Natural Language :: English",
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python",
-        # 'Programming Language :: Python :: 2.7', 'Programming Language :: Python :: 3',
-        # 'Programming Language :: Python :: 3.4',
-        # 'Programming Language :: Python :: 3.5',
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",

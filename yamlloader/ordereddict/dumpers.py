@@ -1,9 +1,8 @@
 """Dumpers for `:py:class:~collections.OrderedDict`."""
 
+from collections import OrderedDict
 
 import yaml
-
-from collections import OrderedDict
 
 from .. import settings
 
