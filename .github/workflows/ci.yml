@@ -17,7 +17,7 @@ jobs:
     name: tests on ubuntu with ${{ matrix.python-version }}
     steps:
       - uses: actions/checkout@v2.4.0
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v3
         name: Set up Python ${{ matrix.python-version }}
 
         with:
