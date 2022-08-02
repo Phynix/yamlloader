@@ -17,7 +17,7 @@ def long_description():
 dev_requiremnets = ["pytest", "hypothesis"]
 setup(
     name="yamlloader",
-    version="1.1.0",
+    version="1.2.0",
     author='Jonas Eschle "Mayou36", Johannes Lade "SebastianJL"',
     author_email="jonas.eschle@phynix.science, johannes.lade@phynix.science",
     maintainer='Jonas Eschle "Mayou36"',
@@ -40,6 +40,7 @@ setup(
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
         "Topic :: Utilities",
     ],
     packages=["yamlloader", "yamlloader.ordereddict"],
