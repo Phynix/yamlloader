@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.0.1
+    rev: v4.4.0
     hooks:
       - id: check-added-large-files
       - id: check-case-conflict
@@ -18,7 +18,7 @@ repos:
 
 
   - repo: https://github.com/myint/docformatter
-    rev: v1.4
+    rev: v1.5.0
     hooks:
       - id: docformatter
         args: [ -r, --in-place, --wrap-descriptions, '120', --wrap-summaries, '120', -- ]
@@ -36,19 +36,19 @@ repos:
 
 
   - repo: https://github.com/asottile/pyupgrade
-    rev: v2.20.0
+    rev: v3.2.3
     hooks:
       - id: pyupgrade
         args: [ --py36-plus ]
 
   - repo: https://github.com/asottile/setup-cfg-fmt
-    rev: v1.17.0
+    rev: v2.2.0
     hooks:
       - id: setup-cfg-fmt
 
   # Notebook formatting
   - repo: https://github.com/nbQA-dev/nbQA
-    rev: 0.13.1
+    rev: 1.5.3
     hooks:
       - id: nbqa-isort
         additional_dependencies: [ isort==5.6.4 ]
@@ -58,12 +58,12 @@ repos:
         args: [ --py37-plus ]
 
   - repo: https://github.com/mgedmin/check-manifest
-    rev: '0.46'
+    rev: '0.48'
     hooks:
       - id: check-manifest
         stages: [ manual ]
 
   - repo: https://github.com/ambv/black
-    rev: 21.6b0
+    rev: 22.10.0
     hooks:
       - id: black

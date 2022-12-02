@@ -10,7 +10,7 @@ if sys.version_info[:2] < (2, 7):
         "Please upgrade your distribution and/or packages."
     )
 
-__version__ = "1.1.0"
+__version__ = "1.2.1"
 __author__ = 'Jonas Eschle "Mayou36", Johannes Lade "SebastianJL"'
 __email__ = "jonas.eschle@phynix.science, johannes.lade@phynix.science"
 
