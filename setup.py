@@ -44,7 +44,7 @@ setup(
         "Topic :: Utilities",
     ],
     packages=["yamlloader", "yamlloader.ordereddict"],
-    python_requires=">=3.6",
+    python_requires=">=3.7",
     install_requires=requirements,
     tests_require=dev_requiremnets,
     extras_require={"dev": dev_requiremnets},
