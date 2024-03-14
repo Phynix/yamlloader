@@ -21,7 +21,7 @@ def construct_mapping(self, node, deep=False):
         self.flatten_mapping(node)
     else:
         msg = f"Expected a mapping node, but found {node.id}"
-        raise yaml.constructor.ConstructError(None, None, msg, node.start_mark)
+        raise yaml.constructor.ConstructorError(None, None, msg, node.start_mark)
 
     mapping = OrderedDict()
 
@@ -30,7 +30,7 @@ def construct_mapping(self, node, deep=False):
         try:
             hash(key)
         except TypeError as err:
-            raise yaml.constructor.ConstructError(
+            raise yaml.constructor.ConstructorError(
                 "while constructing a mapping",
                 node.start_mark,
                 f"found unacceptable key ({err})",
