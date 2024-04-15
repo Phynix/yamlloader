@@ -1,5 +1,7 @@
 """Loaders for `:py:class:~collections.OrderedDict`."""
 
+from __future__ import annotations
+
 from collections import OrderedDict
 
 import yaml
@@ -30,12 +32,13 @@ def construct_mapping(self, node, deep=False):
         try:
             hash(key)
         except TypeError as err:
+            msg = "while constructing a mapping"
             raise yaml.constructor.ConstructorError(
-                "while constructing a mapping",
+                msg,
                 node.start_mark,
                 f"found unacceptable key ({err})",
                 key_node.start_mark,
-            )
+            ) from err
         value = self.construct_object(value_node, deep=deep)
         mapping[key] = value
     return mapping

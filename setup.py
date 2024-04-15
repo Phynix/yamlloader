@@ -1,16 +1,18 @@
-import os
+from __future__ import annotations
+
+from pathlib import Path
 
 from setuptools import setup
 
-here = os.path.abspath(os.path.dirname(__file__))
+here = Path(__file__).resolve().parent
 
-with open(os.path.join(here, "requirements.txt")) as f:
+with (here / "requirements.txt").open() as f:
     requirements = f.read().split("\n")
 
 
 def long_description():
     """Load README.rst."""
-    with open("README.rst", encoding="utf-8") as f:
+    with Path("README.rst").open(encoding="utf-8") as f:
         return f.read()
 
 
@@ -41,6 +43,8 @@ setup(
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
+        "Topic :: Software Development :: Libraries",
         "Topic :: Utilities",
     ],
     packages=["yamlloader", "yamlloader.ordereddict"],
