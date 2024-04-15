@@ -1,5 +1,7 @@
 """Dumpers for `:py:class:~collections.OrderedDict`."""
 
+from __future__ import annotations
+
 from collections import OrderedDict
 
 import yaml

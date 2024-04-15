@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 #
 # yamlloader documentation build configuration file, created by
 # sphinx-quickstart on Wed Dec 13 13:46:00 2017.
@@ -16,10 +15,12 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-import os
-import sys
+from __future__ import annotations
 
-sys.path.insert(0, os.path.abspath("../.."))
+import sys
+from pathlib import Path
+
+sys.path.insert(0, Path("../..").resolve())
 
 
 # -- General configuration ------------------------------------------------
@@ -29,16 +30,16 @@ sys.path.insert(0, os.path.abspath("../.."))
 # needs_sphinx = '1.0'
 
 # Manually added things
-import os
+
+import sphinx_rtd_theme
 
 import yamlloader
 
-here = os.path.abspath(os.path.dirname(__file__))
+here = Path(__file__).resolve().parent
 
 autoclass_content = "both"  # document modules and packages
 
 # Sphinx theme
-import sphinx_rtd_theme
 
 html_theme = "sphinx_rtd_theme"
 
@@ -59,7 +60,7 @@ extensions = [
     "sphinx.ext.githubpages",
 ]
 
-html_logo = os.path.join(here, "static/img/phynix_logo_medium.png")
+html_logo = here / "static/img/phynix_logo_medium.png"
 
 # Napoleon settings (convert numpy/google docstrings to proper ReST
 napoleon_google_docstring = False
