@@ -59,7 +59,7 @@ Documentation = "https://yamlloader.readthedocs.io/"
 
 [tool.hatch]
 version.source = "vcs"
-build.hooks.vcs.version-file = "src/yamlloader/version.py"
+build.hooks.vcs.version-file = "src/yamlloader/_version.py"
 
 [tool.ruff]
 #src = ["src"]

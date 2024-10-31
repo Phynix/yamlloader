@@ -10,3 +10,6 @@ dist
 MANIFEST
 /.hypothesis/
 *.coverage
+/docs/api/_build/
+/.idea/
+/src/yamlloader/_version.py
