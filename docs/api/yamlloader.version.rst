@@ -1,7 +1,7 @@
-loaders
+version
 =======
 
-.. automodule:: yamlloader.ordereddict.loaders
+.. automodule:: yamlloader.version
    :members:
    :undoc-members:
    :show-inheritance:
