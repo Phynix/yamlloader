@@ -56,6 +56,12 @@ repos:
       - id: check-manifest
         stages: [ manual ]
 
+    # auto walrus
+  - repo: https://github.com/MarcoGorelli/auto-walrus
+    rev: 0.3.4
+    hooks:
+      - id: auto-walrus
+
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: "v0.7.1"
     hooks:
