@@ -31,8 +31,6 @@ sys.path.insert(0, Path("../..").resolve())
 
 # Manually added things
 
-import sphinx_rtd_theme
-
 import yamlloader
 
 here = Path(__file__).resolve().parent
@@ -43,7 +41,7 @@ autoclass_content = "both"  # document modules and packages
 
 html_theme = "sphinx_rtd_theme"
 
-html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+# html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
@@ -60,7 +58,7 @@ extensions = [
     "sphinx.ext.githubpages",
 ]
 
-html_logo = here / "static/img/phynix_logo_medium.png"
+html_logo = str(here / "_static/img/phynix_logo_medium.png")
 
 # Napoleon settings (convert numpy/google docstrings to proper ReST
 napoleon_google_docstring = False
@@ -131,8 +129,8 @@ todo_include_todos = True
 #
 # html_theme_options = {}
 
-# Add any paths that contain custom static files (such as style sheets) here,
-# relative to this directory. They are copied after the builtin static files,
+# Add any paths that contain custom _static files (such as style sheets) here,
+# relative to this directory. They are copied after the builtin _static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ["_static"]
 
@@ -228,6 +226,3 @@ epub_copyright = copyright
 
 # A list of files that should not be packed into the epub file.
 epub_exclude_files = ["search.html"]
-
-# Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {"https://docs.python.org/": None}
