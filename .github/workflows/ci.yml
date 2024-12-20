@@ -35,7 +35,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
         run: |
-          pip install .[dev] cython coveralls coverage --system
+          pip install .[dev] cython coveralls coverage
       - name: Test with pytest
         run: |
           . ci/run_tests.sh
