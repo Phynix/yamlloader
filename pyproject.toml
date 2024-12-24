@@ -50,7 +50,7 @@ classifiers = [
 
 
 [project.optional-dependencies]
-test = ["pytest", "hypothesis"]
+test = ["coverage", "hypothesis"]
 doc = ["sphinx", "sphinx-rtd-theme", "sphinx-autodoc-typehints", "sphinxcontrib-apidoc"]
 dev = ['yamlloader[test,doc]']
 [project.urls]
