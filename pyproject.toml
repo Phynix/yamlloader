@@ -49,14 +49,13 @@ classifiers = [
   "Topic :: Utilities",
 ]
 
+dynamic = [ "version" ]
 
-[project.optional-dependencies]
-test = ["coverage", "hypothesis"]
-doc = ["sphinx", "sphinx-rtd-theme", "sphinx-autodoc-typehints", "sphinxcontrib-apidoc"]
-dev = ['yamlloader[test,doc]']
-[project.urls]
-Homepage = "https://github.com/Phynix/yamlloader"
-Documentation = "https://yamlloader.readthedocs.io/"
+optional-dependencies.dev = [ "yamlloader[test,doc]" ]
+optional-dependencies.doc = [ "sphinx", "sphinx-autodoc-typehints", "sphinx-rtd-theme", "sphinxcontrib-apidoc" ]
+optional-dependencies.test = [ "coverage", "hypothesis" ]
+urls.Documentation = "https://yamlloader.readthedocs.io/"
+urls.Homepage = "https://github.com/Phynix/yamlloader"
 
 [tool.hatch]
 version.source = "vcs"
