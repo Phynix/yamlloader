@@ -51,6 +51,8 @@ classifiers = [
 
 dynamic = [ "version" ]
 
+dependencies = [ "pyyaml" ]
+
 optional-dependencies.dev = [ "yamlloader[test,doc]" ]
 optional-dependencies.doc = [ "sphinx", "sphinx-autodoc-typehints", "sphinx-rtd-theme", "sphinxcontrib-apidoc" ]
 optional-dependencies.test = [ "coverage", "hypothesis" ]
