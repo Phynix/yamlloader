@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-coverage run  --source=. --branch -m unittest discover && coverage report src/yamlloader/*.py
-coverage report
+uv run coverage run --source=. --branch -m unittest discover && uv run coverage report src/yamlloader/*.py
+uv run coverage report
