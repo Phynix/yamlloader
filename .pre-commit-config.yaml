@@ -57,10 +57,10 @@ repos:
         stages: [ manual ]
 
     # auto walrus for Python 3.8
-#  - repo: https://github.com/MarcoGorelli/auto-walrus
-#    rev: 0.3.4
-#    hooks:
-#      - id: auto-walrus
+  - repo: https://github.com/MarcoGorelli/auto-walrus
+    rev: 0.3.4
+    hooks:
+      - id: auto-walrus
 
   - repo: https://github.com/tox-dev/pyproject-fmt
     rev: "v2.5.0"
