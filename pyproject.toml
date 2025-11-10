@@ -54,7 +54,7 @@ dependencies = [ "pyyaml" ]
 
 optional-dependencies.dev = [ "yamlloader[test,doc]" ]
 optional-dependencies.doc = [ "sphinx", "sphinx-autodoc-typehints", "sphinx-rtd-theme", "sphinxcontrib-apidoc" ]
-optional-dependencies.test = [ "coverage", "hypothesis" ]
+optional-dependencies.test = [ "coverage", "hypothesis", "pytest" ]
 urls.Documentation = "https://yamlloader.readthedocs.io/"
 urls.Homepage = "https://github.com/Phynix/yamlloader"
 

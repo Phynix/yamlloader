@@ -66,7 +66,7 @@ def dict_val_strat(ascii_only=False):
 def get_extended_dict(ascii_only=False, dict_class=None):
     def extend_dict(strategy):
         new_dict = st.dictionaries(
-            keys=copy.deepcopy(dict_keys_strat(ascii_only=ascii_only)),
+            keys=dict_keys_strat(ascii_only=ascii_only),
             values=strategy,
             dict_class=dict_class,
         )
@@ -78,8 +78,8 @@ def get_extended_dict(ascii_only=False, dict_class=None):
 def recursive_dict_strat(ascii_only=False, dict_class=None):
     return st.recursive(
         base=st.dictionaries(
-            keys=copy.deepcopy(dict_keys_strat(ascii_only=ascii_only)),
-            values=copy.deepcopy(dict_val_strat(ascii_only=ascii_only)),
+            keys=dict_keys_strat(ascii_only=ascii_only),
+            values=dict_val_strat(ascii_only=ascii_only),
             dict_class=dict_class,
         ),
         extend=get_extended_dict(ascii_only=ascii_only, dict_class=dict_class),

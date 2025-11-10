@@ -32,7 +32,7 @@ repos:
     rev: v3.19.1
     hooks:
       - id: pyupgrade
-        args: [ --py37-plus ]
+        args: [ --py38-plus ]
 
   - repo: https://github.com/asottile/setup-cfg-fmt
     rev: v2.7.0
@@ -48,7 +48,7 @@ repos:
 
       - id: nbqa-pyupgrade
         additional_dependencies: [ pyupgrade ]
-        args: [ --py37-plus ]
+        args: [ --py38-plus ]
 
   - repo: https://github.com/mgedmin/check-manifest
     rev: '0.50'
@@ -57,17 +57,17 @@ repos:
         stages: [ manual ]
 
     # auto walrus for Python 3.8
-#  - repo: https://github.com/MarcoGorelli/auto-walrus
-#    rev: 0.3.4
-#    hooks:
-#      - id: auto-walrus
+  - repo: https://github.com/MarcoGorelli/auto-walrus
+    rev: 0.3.4
+    hooks:
+      - id: auto-walrus
 
   - repo: https://github.com/tox-dev/pyproject-fmt
     rev: "v2.5.0"
     hooks:
       - id: pyproject-fmt
         args:
-          - --max-supported-python=3.13
+          - --max-supported-python=3.14
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: "v0.8.4"
