@@ -1,7 +1,7 @@
-settings
-========
+yamlloader.settings module
+==========================
 
 .. automodule:: yamlloader.settings
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:

@@ -13,7 +13,7 @@ build:
     - asdf install uv latest
     - asdf global uv latest
     - uv pip install --system .[doc]
-    - python -m sphinx-apidoc -o docs/api src/yamlloader  -fMeT
+    - sphinx-apidoc -o docs/api src/yamlloader  -fMeT
     - python -m sphinx -T -b html -d docs/_build/doctrees -D language=en docs $READTHEDOCS_OUTPUT/html
 
 sphinx:

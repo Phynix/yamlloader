@@ -3,8 +3,8 @@ yamlloader package
 
 .. automodule:: yamlloader
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 Subpackages
 -----------
@@ -21,4 +21,3 @@ Submodules
    :maxdepth: 4
 
    yamlloader.settings
-   yamlloader.version
