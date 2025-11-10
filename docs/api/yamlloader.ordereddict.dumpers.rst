@@ -1,7 +1,7 @@
-dumpers
-=======
+yamlloader.ordereddict.dumpers module
+=====================================
 
 .. automodule:: yamlloader.ordereddict.dumpers
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:

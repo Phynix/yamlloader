@@ -1,10 +1,10 @@
-ordereddict
-===========
+yamlloader.ordereddict package
+==============================
 
 .. automodule:: yamlloader.ordereddict
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 Submodules
 ----------
